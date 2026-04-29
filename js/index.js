@@ -1,52 +1,4 @@
-// English Menu Data
-const menuData = {
-    lunch: [
-        { name: 'Lunch Set', description: '① Salad<br>② Naan or rice<br>③ One type of curry of your choice<br>[Keema egg curry, vegetable curry, chicken curry, butter chicken curry, potato and spinach curry, bean curry]', price: '¥850', image: '/Dishesh/Launch/lunch101.jpg' },
-        { name: 'Namaste Lunch', description: 'Salad<br>Mini naan<br>Rice (small)<br>Chicken tikka<br>Chicken curry<br>Bean and tomato curry (butter flavor)', price: '¥980', image: '/Dishesh/Launch/lunch102.jpg' },
-        { name: 'Happy Lunch Set', description: '① Salad<br>② Tandoori Chicken<br>③ Rice (small)<br>④ One curry of your choice from the main menu<br>⑤ One naan of your choice from the main menu<br>⑥ Mango Lassi', price: '¥1500', image: '/Dishesh/Launch/lunch103.jpg' },
-        { name: 'Ladies Lunch', description: '① Salad<br>② Naan or rice<br>③ One curry of your choice from the curry list<br>④ Dessert', price: '¥850', image: '/Dishesh/Launch/lunch104.jpg' },
-        { name: 'Nepal Himalayan Soup Curry Set', description: '① Salad<br>② Japanese rice or basmati rice<br>③ Chicken mixed soup curry (chicken and various vegetables seasoned with Himalayan herbs and spices)', price: '¥990', image: '/Dishesh/Launch/lunch105.jpg' },
-        { name: 'Pork Cutlet Curry Rice', description: '① Pork cutlet curry rice<br>② Salad', price: '¥900', image: '/Dishesh/Launch/lunch106.jpg' },
-        { name: 'Mutton and Spinach Curry Rice', description: '① Mutton spinach curry rice<br>② Salad', price: '¥900', image: '/Dishesh/Launch/lunch107.jpg' },
-        { name: 'Vegetable Curry with Tandoori Chicken', description: '① Vegetable curry tandoori chicken curry rice<br>② Salad', price: '¥1300', image: '/Dishesh/Launch/lunch108.jpg' }
-    ],
-    special: [
-        { name: 'Himalayan Soup Curry Set', description: '[Nepalese classic soup curry set] Chicken and vegetable soup curry, basmati rice or Japanese rice, salad', price: '¥1100', image: '/Dishesh/special/set_61.jpg' },
-        { name: 'Nan Curry Set', description: 'Choose one curry of your choice [Chicken curry, Keema egg curry, Vegetable curry, Bean curry] with naan or rice', price: '¥990', image: '/Dishesh/special/set_62.jpg' }
-    ],
-    dessert: [
-        { name: 'Today\'s Indian Dessert', description: '', price: '¥380', image: '/Dishesh/dessert_1.jpg' },
-        { name: 'Ice Cream', description: '', price: '¥380', image: '/Dishesh/dessert_2.jpg' }
-    ],
-    'ala-carte': [
-        { name: 'Samosa (2 pieces)', description: 'A typical Indian food made by wrapping various vegetables and cashew nuts and deep frying them.', price: '¥550', image: '/Dishesh/carte/menu_02.jpg' },
-        { name: 'Tandoori Chicken', description: 'Bone-in chicken mixed with yogurt and Indian spices and baked in an earthenware pot', price: '¥580', image: '/Dishesh/carte/menu_09.jpg' }
-    ],
-    curry: [
-        { name: 'Keema Egg Curry', description: 'Curry with minced meat and boiled eggs', price: '¥870', image: '/Dishesh/curry/menu_35.jpg' },
-        { name: 'Butter Chicken Curry', description: 'Curry with various spices, cream, butter, and chicken', price: '¥980', image: '/Dishesh/curry/menu_39.jpg' }
-    ]
-};
-
-const drinksData = [
-    { name: "Kingfisher (India)", price: "¥580", category: "beer", description: "India's most popular beer with a crisp taste" },
-    { name: "Everest Beer (Nepal)", price: "¥580", category: "beer", description: "Premium lager from the Himalayas" },
-    { name: "Mango Lassi", price: "¥400", category: "soft", description: "Traditional sweet mango yogurt smoothie" },
-    { name: "Chai (iced/Hot)", price: "¥350", category: "soft", description: "Traditional Indian spiced tea" }
-];
-
-const heroImages = [
-    '/img/main-image.jpg',
-    '/Dishesh/Launch/lunch101.jpg',
-    '/Dishesh/Launch/lunch103.jpg',
-    '/Dishesh/special_1.jpg',
-    '/Dishesh/special_2.jpg',
-    '/Dishesh/special_3.jpg',
-    '/Dishesh/curry/menu_39.jpg',
-    '/Dishesh/curry/menu_40.jpg',
-    '/Dishesh/Launch/lunch105.jpg',
-    '/Dishesh/dessert_1.jpg'
-];
+import { menuData, drinkData } from './menu-data.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const menuGrid = document.getElementById('menu-grid');
@@ -55,6 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroSlider = document.getElementById('hero-slider');
     const loader = document.getElementById('loader');
     const loaderProgress = document.getElementById('loader-progress');
+
+    const heroImages = [
+        'img/main-image.jpg',
+        'Dishesh/Launch/lunch101.jpg',
+        'Dishesh/Launch/lunch103.jpg',
+        'Dishesh/special_1.jpg'
+    ];
 
     // Page Loader Logic
     let progress = 0;
@@ -226,13 +185,13 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.transition = `all 0.6s ease ${index * 0.1}s`;
             
             card.innerHTML = `
-                <img src="${item.image}" alt="${item.name}" loading="lazy">
+                <img src="${item.image}" alt="${item.en.name}" loading="lazy">
                 <div class="menu-item-content">
                     <h3>
                         <span class="price">${item.price}</span>
-                        ${item.name}
+                        ${item.en.name}
                     </h3>
-                    <p>${item.description}</p>
+                    <p>${item.en.description}</p>
                 </div>
             `;
             menuGrid.appendChild(card);
@@ -242,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderDrinks(subcat) {
         menuGrid.innerHTML = '';
-        const items = subcat === 'all' ? drinksData : drinksData.filter(d => d.category === subcat);
+        const items = subcat === 'all' ? drinkData : drinkData.filter(d => d.category === subcat);
         
         items.forEach((drink, index) => {
             const card = document.createElement('div');
@@ -253,10 +212,10 @@ document.addEventListener('DOMContentLoaded', () => {
             
             card.innerHTML = `
                 <div class="drink-header">
-                    <h3 class="drink-name">${drink.name}</h3>
+                    <h3 class="drink-name">${drink.en.name}</h3>
                     <span class="drink-price">${drink.price}</span>
                 </div>
-                <p class="drink-description">${drink.description}</p>
+                <p class="drink-description">${drink.en.description}</p>
             `;
             menuGrid.appendChild(card);
             setTimeout(() => {

@@ -1,53 +1,4 @@
-// Menu data
-const menuData = {
-    lunch: [
-        { name: 'ランチセット', description: '① サラダ<br>② ナンまたはライス<br>③ お好みのカレーを1種類選択<br>[キーマエッグカレー、野菜カレー、チキンカレー、バターチキンカレー、ポテトとほうれん草のカレー、豆カレー]', price: '¥850', image: '/Dishesh/Launch/lunch101.jpg' },
-        { name: 'ナマステランチ', description: 'サラダ<br>ミニナン<br>ライス (小)<br>チキンティッカ<br>チキンカレー<br>豆とトマトのカレー (バター風味)', price: '¥980', image: '/Dishesh/Launch/lunch102.jpg' },
-        { name: 'ハッピーランチセット', description: '① サラダ<br>② タンドリーチキン<br>③ ライス (小)<br>④ メインメニューからお好みのカレー1種類<br>⑤ メインメニューからお好みのナン1種類<br>⑥ マンゴーラッシー', price: '¥1500', image: '/Dishesh/Launch/lunch103.jpg' },
-        { name: 'レディースランチ', description: '① サラダ<br>② ナンまたはライス<br>③ カレーリストからお好みのカレー1種類<br>④ デザート', price: '¥850', image: '/Dishesh/Launch/lunch104.jpg' },
-        { name: 'ネパール・ヒマラヤスープカレーセット', description: '① サラダ<br>② 日本米またはバスマティライス<br>③ チキンミックススープカレー（チキンと様々な野菜をヒマラヤのハーブとスパイスで味付け）', price: '¥990', image: '/Dishesh/Launch/lunch105.jpg' },
-        { name: 'ポークカツカレーライス', description: '① ポークカツカレーライス<br>② サラダ', price: '¥900', image: '/Dishesh/Launch/lunch106.jpg' },
-        { name: 'マトンとほうれん草のカレーライス', description: '① マトンほうれん草カレーライス<br>② サラダ', price: '¥900', image: '/Dishesh/Launch/lunch107.jpg' },
-        { name: 'タンドリーチキントッピング野菜カレー', description: '① 野菜カレータンドリーチキンカレーライス<br>② サラダ', price: '¥1300', image: '/Dishesh/Launch/lunch108.jpg' }
-    ],
-    // Simplified other categories, they can be expanded
-    special: [
-        { name: 'ヒマラヤスープカレーセット', description: 'ネパール定番のスープカレーセット。チキンと野菜のスープカレー、バスマティライスまたは日本米、サラダ', price: '¥1100', image: '/Dishesh/special/set_61.jpg' },
-        { name: 'ナンカレーセット', description: 'お好みのカレー1種（チキン、キーマエッグ、野菜、豆）とナンまたはライスのセット', price: '¥990', image: '/Dishesh/special/set_62.jpg' }
-    ],
-    dessert: [
-        { name: '本日のインドデザート', description: '', price: '¥380', image: '/Dishesh/dessert_1.jpg' },
-        { name: 'アイスクリーム', description: '', price: '¥380', image: '/Dishesh/dessert_2.jpg' }
-    ],
-    'ala-carte': [
-        { name: 'サモサ (2個)', description: '様々な野菜とカシューナッツを包んで揚げた、インドの代表的なスナック。', price: '¥550', image: '/Dishesh/carte/menu_02.jpg' },
-        { name: 'タンドリーチキン', description: '骨付きチキンをヨーグルトとスパイスに漬け込み、土釜で焼き上げました。', price: '¥580', image: '/Dishesh/carte/menu_09.jpg' }
-    ],
-    curry: [
-        { name: 'キーマエッグカレー', description: 'ひき肉とゆで卵のカレー', price: '¥870', image: '/Dishesh/curry/menu_35.jpg' },
-        { name: 'バターチキンカレー', description: '様々なスパイス、生クリーム、バター、チキンを使用したコクのあるカレー', price: '¥980', image: '/Dishesh/curry/menu_39.jpg' }
-    ]
-};
-
-const drinksData = [
-    { name: "キングフィッシャー (インド)", price: "¥580", category: "beer", description: "インドで最もポピュラーなビール。キレのある味わい。" },
-    { name: "エベレストビール (ネパール)", price: "¥580", category: "beer", description: "ヒマラヤの天然水を使用したプレミアムラガー。" },
-    { name: "マンゴーラッシー", price: "¥480", category: "soft", description: "甘いマンゴーとヨーグルトのスムージー。" },
-    { name: "チャイ (アイス/ホット)", price: "¥350", category: "soft", description: "伝統的なインドのスパイスティー。" }
-];
-
-const heroImages = [
-    '/img/main-image.jpg',
-    '/Dishesh/Launch/lunch101.jpg',
-    '/Dishesh/Launch/lunch103.jpg',
-    '/Dishesh/special_1.jpg',
-    '/Dishesh/special_2.jpg',
-    '/Dishesh/special_3.jpg',
-    '/Dishesh/curry/menu_39.jpg',
-    '/Dishesh/curry/menu_40.jpg',
-    '/Dishesh/Launch/lunch105.jpg',
-    '/Dishesh/dessert_1.jpg'
-];
+import { menuData, drinkData } from './menu-data.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const menuGrid = document.getElementById('menu-grid');
@@ -56,6 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroSlider = document.getElementById('hero-slider');
     const loader = document.getElementById('loader');
     const loaderProgress = document.getElementById('loader-progress');
+
+    const heroImages = [
+        'img/main-image.jpg',
+        'Dishesh/Launch/lunch101.jpg',
+        'Dishesh/Launch/lunch103.jpg',
+        'Dishesh/special_1.jpg'
+    ];
 
     // Page Loader Logic
     let progress = 0;
@@ -227,13 +185,13 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.transition = `all 0.6s ease ${index * 0.1}s`;
             
             card.innerHTML = `
-                <img src="${item.image}" alt="${item.name}" loading="lazy">
+                <img src="${item.image}" alt="${item.jp.name}" loading="lazy">
                 <div class="menu-item-content">
                     <h3>
                         <span class="price">${item.price}</span>
-                        ${item.name}
+                        ${item.jp.name}
                     </h3>
-                    <p>${item.description}</p>
+                    <p>${item.jp.description}</p>
                 </div>
             `;
             menuGrid.appendChild(card);
@@ -243,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderDrinks(subcat) {
         menuGrid.innerHTML = '';
-        const items = subcat === 'all' ? drinksData : drinksData.filter(d => d.category === subcat);
+        const items = subcat === 'all' ? drinkData : drinkData.filter(d => d.category === subcat);
         
         items.forEach((drink, index) => {
             const card = document.createElement('div');
@@ -254,10 +212,10 @@ document.addEventListener('DOMContentLoaded', () => {
             
             card.innerHTML = `
                 <div class="drink-header">
-                    <h3 class="drink-name">${drink.name}</h3>
+                    <h3 class="drink-name">${drink.jp.name}</h3>
                     <span class="drink-price">${drink.price}</span>
                 </div>
-                <p class="drink-description">${drink.description}</p>
+                <p class="drink-description">${drink.jp.description}</p>
             `;
             menuGrid.appendChild(card);
             setTimeout(() => {
