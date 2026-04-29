@@ -1,10 +1,11 @@
-
 function fixImagePath(path) {
-    // Remove leading ./ or /
+    // normalize
     path = path.replace(/^\.?\//, '');
 
-    // Always return correct relative path from root
-    return window.location.origin + '/' + path;
+    // use current file location instead of domain root
+    const base = window.location.pathname.replace(/\/[^\/]*$/, '/');
+
+    return base + path;
 }
 
 const menuData = {
