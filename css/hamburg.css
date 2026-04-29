@@ -1,0 +1,32 @@
+/* Hamburger Specific Styles */
+#nav-list.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--bg-cream);
+    padding: 2rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    align-items: center;
+    gap: 1.5rem;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#hamburger.open .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+#hamburger.open .bar:nth-child(2) {
+    opacity: 0;
+}
+
+#hamburger.open .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
