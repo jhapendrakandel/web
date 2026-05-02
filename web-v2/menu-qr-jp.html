@@ -1,156 +1,1296 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>ナマステ メニュー</title>
-<link rel="icon" href="img/logo.png"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-<!-- paste the exact same <style> block from menu-qr.html here -->
-<link rel="stylesheet" href="css/index.css"/>
-<style>
-/* paste same style block from menu-qr.html */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Lato:wght@300;400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
-:root{--red:#8B1A1A;--gold:#C9A84C;--cream:#FDF6EC;--text:#2C2C2C;--mid:#5A5A5A}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Noto Sans JP','Lato',sans-serif;background:var(--cream);color:var(--text)}
-.qr-header{background:var(--red);padding:14px 16px;text-align:center;position:sticky;top:0;z-index:100}
-.qr-header img{height:36px;width:auto;filter:brightness(2)}
-.qr-header p{color:rgba(255,255,255,.7);font-size:.68rem;letter-spacing:.1em;margin-top:4px}
-.lang-bar{background:#111;display:flex;justify-content:center;padding:8px;gap:8px}
-.lang-bar a{color:rgba(255,255,255,.5);font-size:.72rem;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;padding:5px 14px;border:1px solid rgba(255,255,255,.15);
-  border-radius:20px;text-decoration:none;transition:.2s}
-.lang-bar a.active{color:var(--gold);border-color:var(--gold)}
-.hours-strip{background:#1a1a1a;color:rgba(255,255,255,.7);font-size:.72rem;text-align:center;padding:7px;letter-spacing:.04em}
-.hours-strip strong{color:var(--gold)}
-.cat-tabs{display:flex;overflow-x:auto;gap:8px;padding:14px 12px;background:#fff;
-  border-bottom:1px solid rgba(0,0,0,.06);scrollbar-width:none;position:sticky;top:64px;z-index:99}
-.cat-tabs::-webkit-scrollbar{display:none}
-.cat-tab{flex-shrink:0;padding:8px 16px;border:1.5px solid rgba(0,0,0,.1);border-radius:20px;
-  font-size:.78rem;font-weight:700;background:#fff;color:var(--mid);cursor:pointer;transition:.2s}
-.cat-tab.active{background:var(--red);border-color:var(--red);color:#fff}
-.menu-list{padding:12px;display:flex;flex-direction:column;gap:12px;max-width:600px;margin:0 auto}
-.menu-qr-card{background:#fff;border-radius:12px;overflow:hidden;display:grid;grid-template-columns:100px 1fr;box-shadow:0 2px 8px rgba(0,0,0,.07)}
-.menu-qr-card-img{width:100px;height:100px;object-fit:cover;display:block}
-.menu-qr-card-body{padding:12px 12px 12px 10px;display:flex;flex-direction:column;gap:5px}
-.menu-qr-card-body h3{font-family:'Playfair Display',serif;font-size:.92rem;color:var(--text);line-height:1.25}
-.menu-qr-card-body p{font-size:.72rem;color:var(--mid);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.menu-qr-price{font-size:1rem;font-weight:700;color:var(--red);margin-top:auto}
-.menu-qr-badge{display:inline-block;font-size:.6rem;font-weight:700;background:var(--gold);color:#000;border-radius:10px;padding:2px 7px;align-self:flex-start}
-.drink-qr-card{background:#fff;border-radius:10px;padding:14px;display:flex;justify-content:space-between;align-items:center;gap:8px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.drink-qr-card h4{font-size:.88rem;color:var(--text);flex:1;line-height:1.3}
-.drink-qr-card p{font-size:.72rem;color:var(--mid)}
-.drink-qr-card .dq-price{font-size:.95rem;font-weight:700;color:var(--red);white-space:nowrap}
-.drink-subfilter{display:flex;overflow-x:auto;gap:6px;padding:0 12px 10px;scrollbar-width:none}
-.drink-subfilter::-webkit-scrollbar{display:none}
-.dsf-btn{flex-shrink:0;padding:6px 13px;border:1px solid rgba(0,0,0,.12);border-radius:16px;font-size:.72rem;font-weight:700;background:#fff;color:var(--mid);cursor:pointer;transition:.2s}
-.dsf-btn.active{background:var(--red);border-color:var(--red);color:#fff}
-.qr-footer{text-align:center;padding:30px 16px 40px;color:var(--mid);font-size:.75rem;line-height:1.8}
-.qr-footer strong{color:var(--text)}
-.qr-footer a{color:var(--red);text-decoration:none;font-weight:700}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover" />
+  <title>ナマステ メニュー</title>
+  <link rel="icon" href="img/logo.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+
+    :root {
+      --red: #8B1A1A;
+      --red-d: #6B1313;
+      --gold: #C9A84C;
+      --gold-lt: #F0D98A;
+      --cream: #FDF8F0;
+      --cream-d: #F2E8D5;
+      --cream-dd: #E8D9BC;
+      --white: #FFFFFF;
+      --text: #1A1A1A;
+      --mid: #6B6B6B;
+      --light: #A8A8A8;
+      --r: 16px;
+      --r-sm: 10px;
+      --shadow: 0 6px 28px rgba(0, 0, 0, .09);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: env(safe-area-inset-bottom, 24px)
+    }
+
+    .bg-blobs {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px)
+    }
+
+    .blob-1 {
+      width: 380px;
+      height: 380px;
+      background: rgba(201, 168, 76, .13);
+      top: -80px;
+      right: -100px
+    }
+
+    .blob-2 {
+      width: 300px;
+      height: 300px;
+      background: rgba(139, 26, 26, .07);
+      top: 40%;
+      left: -120px
+    }
+
+    .blob-3 {
+      width: 260px;
+      height: 260px;
+      background: rgba(201, 168, 76, .08);
+      bottom: 15%;
+      right: -60px
+    }
+
+    .blob-4 {
+      width: 200px;
+      height: 200px;
+      background: rgba(201, 168, 76, .1);
+      bottom: -60px;
+      left: 30%
+    }
+
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid;
+      opacity: .08
+    }
+
+    .ring-1 {
+      width: 180px;
+      height: 180px;
+      border-color: var(--gold);
+      top: 120px;
+      left: -60px
+    }
+
+    .ring-2 {
+      width: 120px;
+      height: 120px;
+      border-color: var(--red);
+      top: 55%;
+      right: 20px
+    }
+
+    .ring-3 {
+      width: 90px;
+      height: 90px;
+      border-color: var(--gold);
+      bottom: 200px;
+      left: 40%
+    }
+
+    /* Header */
+    .qr-header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(253, 248, 240, .92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(201, 168, 76, .18);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .qr-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .qr-brand img {
+      height: 32px;
+      width: auto
+    }
+
+    .qr-brand-text strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: .88rem;
+      color: var(--text)
+    }
+
+    .qr-brand-text span {
+      font-size: .58rem;
+      letter-spacing: .12em;
+      color: var(--mid);
+      text-transform: uppercase
+    }
+
+    .lang-sw {
+      display: flex;
+      gap: 5px
+    }
+
+    .lang-sw a {
+      font-size: .62rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border-radius: 20px;
+      border: 1.5px solid rgba(139, 26, 26, .2);
+      color: var(--mid);
+      text-decoration: none;
+      transition: .2s
+    }
+
+    .lang-sw a.active {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff
+    }
+
+    /* Status */
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 7px 16px;
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      position: relative;
+      z-index: 1
+    }
+
+    .sdot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0
+    }
+
+    .status-open {
+      color: #15803d
+    }
+
+    .status-break {
+      color: #b45309
+    }
+
+    .status-closed {
+      color: #991b1b
+    }
+
+    .hours-strip {
+      text-align: center;
+      padding: 4px 16px 10px;
+      font-size: .68rem;
+      color: var(--mid);
+      position: relative;
+      z-index: 1
+    }
+
+    .hours-strip strong {
+      color: var(--gold);
+      font-weight: 700
+    }
+
+    /* Tabs */
+    .cat-wrap {
+      position: sticky;
+      top: 54px;
+      z-index: 150;
+      background: rgba(253, 248, 240, .95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 0, 0, .06)
+    }
+
+    .cat-tabs {
+      display: flex;
+      overflow-x: auto;
+      gap: 6px;
+      padding: 10px 14px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch
+    }
+
+    .cat-tabs::-webkit-scrollbar {
+      display: none
+    }
+
+    .cat-tab {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-size: .72rem;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      border: 1.5px solid rgba(0, 0, 0, .1);
+      background: #fff;
+      color: var(--mid);
+      transition: all .22s;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .04)
+    }
+
+    .cat-tab:active {
+      transform: scale(.94)
+    }
+
+    .cat-tab.active {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(139, 26, 26, .28)
+    }
+
+    /* Menu grid */
+    .menu-section {
+      position: relative;
+      z-index: 1;
+      padding: 20px 14px 10px;
+      max-width: 700px;
+      margin: 0 auto
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+      gap: 16px
+    }
+
+    /* Dish card */
+    .dish-card {
+      background: var(--white);
+      border-radius: var(--r);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0, 0, 0, .05);
+      transition: transform .22s, box-shadow .22s;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column
+    }
+
+    .dish-card:active {
+      transform: scale(.96)
+    }
+
+    .dish-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, .13)
+    }
+
+    .dish-img-wrap {
+      padding: 14px 14px 0;
+      display: flex;
+      justify-content: center;
+      position: relative
+    }
+
+    .dish-img-circle {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 3px solid var(--cream-d);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .12);
+      background: var(--cream-d)
+    }
+
+    .dish-img-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s
+    }
+
+    .dish-card:hover .dish-img-circle img {
+      transform: scale(1.08)
+    }
+
+    .dish-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: .52rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      background: var(--gold);
+      color: #000;
+      padding: 3px 7px;
+      border-radius: 8px
+    }
+
+    .dish-body {
+      padding: 12px 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1
+    }
+
+    .dish-name {
+      font-family: 'Playfair Display', serif;
+      font-size: .85rem;
+      color: var(--text);
+      line-height: 1.35;
+      text-align: center
+    }
+
+    .dish-desc {
+      font-size: .67rem;
+      color: var(--mid);
+      line-height: 1.55;
+      text-align: center;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden
+    }
+
+    .dish-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 8px;
+      border-top: 1px solid var(--cream-d)
+    }
+
+    .dish-price {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--red)
+    }
+
+    .dish-add {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: var(--cream-d);
+      border: none;
+      font-size: .67rem;
+      font-weight: 700;
+      color: var(--red);
+      cursor: pointer;
+      transition: .18s
+    }
+
+    .dish-add:hover {
+      background: var(--red);
+      color: #fff
+    }
+
+    /* Drinks */
+    .drink-subfilter {
+      display: flex;
+      overflow-x: auto;
+      gap: 6px;
+      padding: 0 0 14px;
+      scrollbar-width: none
+    }
+
+    .drink-subfilter::-webkit-scrollbar {
+      display: none
+    }
+
+    .dsf-btn {
+      flex-shrink: 0;
+      padding: 7px 14px;
+      border: 1.5px solid rgba(0, 0, 0, .1);
+      border-radius: 20px;
+      font-size: .7rem;
+      font-weight: 600;
+      background: #fff;
+      color: var(--mid);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: .18s
+    }
+
+    .dsf-btn.active {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff
+    }
+
+    .drink-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    .drink-card {
+      background: var(--white);
+      border-radius: var(--r-sm);
+      padding: 13px 15px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, .06);
+      border: 1px solid rgba(0, 0, 0, .05)
+    }
+
+    .drink-dot {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--cream-d), var(--cream-dd));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem
+    }
+
+    .drink-info {
+      flex: 1;
+      min-width: 0
+    }
+
+    .drink-name {
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3
+    }
+
+    .drink-desc {
+      font-size: .67rem;
+      color: var(--mid);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis
+    }
+
+    .drink-right {
+      text-align: right;
+      flex-shrink: 0
+    }
+
+    .drink-price {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--red)
+    }
+
+    .drink-cat {
+      font-size: .58rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-top: 2px
+    }
+
+    /* Order */
+    .order-section {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px 14px 30px;
+      position: relative;
+      z-index: 1
+    }
+
+    .order-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--text);
+      margin-bottom: 4px
+    }
+
+    .order-sub {
+      font-size: .72rem;
+      color: var(--mid);
+      margin-bottom: 20px
+    }
+
+    .order-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px
+    }
+
+    .order-btn {
+      background: var(--white);
+      border-radius: var(--r);
+      padding: 20px 12px 16px;
+      text-align: center;
+      border: 1.5px solid rgba(0, 0, 0, .07);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: .22s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px
+    }
+
+    .order-btn:active {
+      transform: scale(.95)
+    }
+
+    .order-btn:hover {
+      border-color: var(--red)
+    }
+
+    .order-btn img {
+      height: 38px;
+      width: auto;
+      object-fit: contain
+    }
+
+    .order-btn h4 {
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--text)
+    }
+
+    .order-btn p {
+      font-size: .65rem;
+      color: var(--mid)
+    }
+
+    .order-btn-full {
+      background: var(--white);
+      border-radius: var(--r-sm);
+      padding: 15px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1.5px solid rgba(0, 0, 0, .07);
+      box-shadow: 0 3px 12px rgba(0, 0, 0, .06);
+      cursor: pointer;
+      transition: .2s
+    }
+
+    .order-btn-full:active {
+      transform: scale(.98)
+    }
+
+    .order-btn-full-left {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .order-btn-full img {
+      height: 32px;
+      width: auto;
+      object-fit: contain
+    }
+
+    .order-btn-full h4 {
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--text)
+    }
+
+    .order-btn-full p {
+      font-size: .68rem;
+      color: var(--mid)
+    }
+
+    .order-btn-full i {
+      color: var(--mid);
+      font-size: .8rem
+    }
+
+    /* Branch popup */
+    .bp-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .6);
+      z-index: 1000;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s
+    }
+
+    .bp-overlay.open {
+      opacity: 1;
+      pointer-events: all
+    }
+
+    .bp-sheet {
+      background: var(--white);
+      border-radius: 24px 24px 0 0;
+      width: 100%;
+      max-width: 480px;
+      padding: 20px 18px 36px;
+      transform: translateY(100%);
+      transition: transform .36s cubic-bezier(.2, 1, .3, 1);
+      padding-bottom: env(safe-area-inset-bottom, 32px)
+    }
+
+    .bp-overlay.open .bp-sheet {
+      transform: translateY(0)
+    }
+
+    .bp-drag {
+      width: 36px;
+      height: 4px;
+      border-radius: 2px;
+      background: #e0e0e0;
+      margin: 0 auto 18px
+    }
+
+    .bp-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 5px
+    }
+
+    .bp-head img {
+      height: 26px;
+      object-fit: contain
+    }
+
+    .bp-head h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--text)
+    }
+
+    .bp-note {
+      font-size: .72rem;
+      color: var(--mid);
+      margin-bottom: 16px
+    }
+
+    .bp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px
+    }
+
+    .bp-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 15px;
+      border: 1.5px solid rgba(0, 0, 0, .09);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text);
+      transition: .18s
+    }
+
+    .bp-item:active {
+      background: var(--cream);
+      transform: scale(.98)
+    }
+
+    .bp-item h4 {
+      font-size: .88rem;
+      font-weight: 700
+    }
+
+    .bp-item span {
+      font-size: .72rem;
+      color: var(--mid)
+    }
+
+    .bp-item i {
+      color: var(--red)
+    }
+
+    .bp-cancel {
+      margin-top: 14px;
+      width: 100%;
+      padding: 13px;
+      background: transparent;
+      border: 1.5px solid rgba(0, 0, 0, .1);
+      border-radius: 10px;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--mid);
+      cursor: pointer
+    }
+
+    /* Lightbox */
+    .lb-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .75);
+      z-index: 1000;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s
+    }
+
+    .lb-overlay.open {
+      opacity: 1;
+      pointer-events: all
+    }
+
+    .lb-sheet {
+      background: var(--white);
+      border-radius: 24px 24px 0 0;
+      width: 100%;
+      max-width: 480px;
+      max-height: 88vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(100%);
+      transition: transform .36s cubic-bezier(.2, 1, .3, 1);
+      padding-bottom: env(safe-area-inset-bottom, 0)
+    }
+
+    .lb-overlay.open .lb-sheet {
+      transform: translateY(0)
+    }
+
+    .lb-img-wrap {
+      position: relative;
+      height: 210px;
+      flex-shrink: 0;
+      overflow: hidden;
+      background: var(--cream-d)
+    }
+
+    .lb-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover
+    }
+
+    .lb-drag {
+      width: 36px;
+      height: 4px;
+      border-radius: 2px;
+      background: #e0e0e0;
+      margin: 14px auto 8px
+    }
+
+    .lb-body {
+      padding: 6px 20px 24px;
+      overflow-y: auto
+    }
+
+    .lb-cat {
+      font-size: .6rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gold)
+    }
+
+    .lb-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--text);
+      margin: 4px 0
+    }
+
+    .lb-price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--red);
+      margin-bottom: 10px
+    }
+
+    .lb-desc {
+      font-size: .82rem;
+      color: var(--mid);
+      line-height: 1.7;
+      margin-bottom: 12px
+    }
+
+    .lb-allergy-lbl {
+      font-size: .6rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 6px
+    }
+
+    .lb-allergy-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 16px
+    }
+
+    .lb-tag {
+      font-size: .68rem;
+      padding: 4px 9px;
+      border-radius: 12px;
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffc107;
+      font-weight: 700
+    }
+
+    .lb-close {
+      width: 100%;
+      padding: 14px;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: .88rem;
+      font-weight: 700;
+      cursor: pointer
+    }
+
+    /* Footer */
+    .qr-footer {
+      position: relative;
+      z-index: 1;
+      background: var(--text);
+      color: rgba(255, 255, 255, .6);
+      padding: 28px 20px 44px;
+      margin-top: 16px
+    }
+
+    .qr-footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 500px;
+      margin: 0 auto
+    }
+
+    .footer-brand img {
+      height: 40px;
+      width: auto;
+      filter: brightness(2);
+      margin-bottom: 10px
+    }
+
+    .footer-brand p {
+      font-size: .72rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, .45)
+    }
+
+    .footer-col h5 {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: .75rem;
+      color: rgba(255, 255, 255, .55);
+      text-decoration: none;
+      margin-bottom: 7px;
+      transition: .2s
+    }
+
+    .footer-col a:hover {
+      color: var(--gold-lt)
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px
+    }
+
+    .footer-socials a {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, .15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, .5);
+      font-size: .8rem;
+      text-decoration: none;
+      transition: .2s
+    }
+
+    .footer-socials a:hover {
+      border-color: var(--gold);
+      color: var(--gold)
+    }
+
+    .footer-copy {
+      text-align: center;
+      font-size: .65rem;
+      color: rgba(255, 255, 255, .25);
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, .07);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto
+    }
+
+    .no-res {
+      text-align: center;
+      padding: 40px;
+      color: var(--light);
+      font-size: .85rem
+    }
+
+    @media(max-width:380px) {
+      .menu-grid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .dish-img-circle {
+        width: 90px;
+        height: 90px
+      }
+    }
+
+    @media(min-width:600px) {
+      .menu-grid {
+        grid-template-columns: repeat(3, 1fr)
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="qr-header">
-  <img src="img/logo.png" alt="ナマステ"/>
-  <p>インド・ネパール料理レストラン · 広島</p>
-</div>
+  <div class="bg-blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+    <div class="ring ring-1"></div>
+    <div class="ring ring-2"></div>
+    <div class="ring ring-3"></div>
+  </div>
 
-<div class="lang-bar">
-  <a href="menu-qr.html">English</a>
-  <a href="menu-qr-jp.html" class="active">日本語</a>
-</div>
+  <header class="qr-header">
+    <div class="qr-brand">
+      <img src="img/logo.png" alt="ナマステ" />
+      <div class="qr-brand-text">
+        <strong>NAMASTE</strong>
+        <span>インド・ネパール料理 · 広島</span>
+      </div>
+    </div>
+    <div class="lang-sw">
+      <a href="menu-qr.html">EN</a>
+      <a href="menu-qr-jp.html" class="active">JP</a>
+    </div>
+  </header>
 
-<div class="hours-strip">
-  <strong>ランチ</strong> 11:00–15:00 (L.O. 14:30) &nbsp;|&nbsp;
-  <strong>ディナー</strong> 17:00–22:00 (L.O. 21:30)
-</div>
+  <div class="status-bar" id="statusBar">
+    <span class="sdot" id="sDot"></span>
+    <span id="sLabel">確認中…</span>
+  </div>
 
-<div class="cat-tabs">
-  <button class="cat-tab active" onclick="qrShow('lunch',this)">☀️ ランチ</button>
-  <button class="cat-tab" onclick="qrShow('curry',this)">🔥 カレー</button>
-  <button class="cat-tab" onclick="qrShow('ala-carte',this)">⭐ アラカルト</button>
-  <button class="cat-tab" onclick="qrShow('special',this)">👑 スペシャル</button>
-  <button class="cat-tab" onclick="qrShow('dessert',this)">🍨 デザート</button>
-  <button class="cat-tab" onclick="qrShow('drinks',this)">🥂 ドリンク</button>
-</div>
+  <div class="hours-strip">
+    <strong>ランチ</strong> 11:00–15:00 <span style="color:var(--light)">(L.O. 14:30)</span>
+    &nbsp;·&nbsp;
+    <strong>ディナー</strong> 17:00–22:00 <span style="color:var(--light)">(L.O. 21:30)</span>
+  </div>
 
-<div class="menu-list" id="menuList"></div>
+  <div class="cat-wrap">
+    <div class="cat-tabs">
+      <button class="cat-tab active" onclick="qrShow('lunch',this)">☀️ ランチ</button>
+      <button class="cat-tab" onclick="qrShow('curry',this)">🔥 カレー</button>
+      <button class="cat-tab" onclick="qrShow('ala-carte',this)">⭐ アラカルト</button>
+      <button class="cat-tab" onclick="qrShow('special',this)">👑 スペシャル</button>
+      <button class="cat-tab" onclick="qrShow('dessert',this)">🍨 デザート</button>
+      <button class="cat-tab" onclick="qrShow('drinks',this)">🥂 ドリンク</button>
+      <button class="cat-tab" onclick="qrShow('order',this)">🛵 注文</button>
+    </div>
+  </div>
 
-<footer class="qr-footer">
-  <strong>ナマステインドレストラン</strong><br/>
-  段原店 <a href="tel:0822620004">082-262-0004</a> &nbsp;·&nbsp;
-  八丁堀店 <a href="tel:0822223240">082-222-3240</a> &nbsp;·&nbsp;
-  大手町店 <a href="tel:0822363339">082-236-3339</a><br/><br/>
-  <a href="index.html">← ウェブサイトへ</a>
-</footer>
+  <div id="menuContent"></div>
 
-<script src="js/jp.index.js"></script>
-<script>
-var currentDrinkFilter = 'all';
+  <footer class="qr-footer">
+    <div class="qr-footer-grid">
+      <div class="footer-brand">
+        <img src="img/logo.png" alt="ナマステ" />
+        <p>1998年より広島で本格インド・ネパール料理をご提供しています。</p>
+        <div class="footer-socials">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-tripadvisor"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>店舗情報</h5>
+        <a href="tel:0822620004"><i class="fas fa-phone"
+            style="font-size:.6rem;margin-right:5px;color:var(--gold)"></i>段原店</a>
+        <a href="tel:0822223240"><i class="fas fa-phone"
+            style="font-size:.6rem;margin-right:5px;color:var(--gold)"></i>八丁堀店</a>
+        <a href="tel:0822363339"><i class="fas fa-phone"
+            style="font-size:.6rem;margin-right:5px;color:var(--gold)"></i>大手町店</a>
+        <h5 style="margin-top:14px">ナビゲーション</h5>
+        <a href="index.html"><i class="fas fa-arrow-left" style="font-size:.6rem;margin-right:5px"></i>ウェブサイトへ</a>
+      </div>
+    </div>
+    <div class="footer-copy">&copy; ナマステインドレストラン 広島. All rights reserved.</div>
+  </footer>
 
-function qrShow(cat, btn) {
-  document.querySelectorAll('.cat-tab').forEach(function(b){ b.classList.remove('active'); });
-  btn.classList.add('active');
-  var list = document.getElementById('menuList');
-  list.innerHTML = '';
+  <!-- Lightbox -->
+  <div class="lb-overlay" id="lbOverlay" onclick="if(event.target===this)closeLb()">
+    <div class="lb-sheet">
+      <div class="lb-img-wrap"><img id="lbImgBg" src="" alt="" /></div>
+      <div class="lb-drag"></div>
+      <div class="lb-body">
+        <p class="lb-cat" id="lbCat"></p>
+        <h2 class="lb-name" id="lbName"></h2>
+        <div class="lb-price" id="lbPrice"></div>
+        <p class="lb-desc" id="lbDesc"></p>
+        <p class="lb-allergy-lbl" id="lbAllergyLbl"></p>
+        <div class="lb-allergy-row" id="lbAllergyRow"></div>
+        <button class="lb-close" onclick="closeLb()">閉じる</button>
+      </div>
+    </div>
+  </div>
 
-  if (cat === 'drinks') {
-    var cats = ['all','beer','whiskey','cocktail','wine','plum','soft'];
-    var labels = {all:'すべて',beer:'🍺 ビール',whiskey:'🥃 ウィスキー',
-                  cocktail:'🍹 カクテル',wine:'🍷 ワイン',plum:'梅酒',soft:'🥤 ソフト'};
-    var sf = document.createElement('div');
-    sf.className = 'drink-subfilter';
-    cats.forEach(function(c){
-      var b = document.createElement('button');
-      b.className = 'dsf-btn' + (c === currentDrinkFilter ? ' active' : '');
-      b.textContent = labels[c];
-      b.onclick = function(){
-        currentDrinkFilter = c;
-        document.querySelectorAll('.dsf-btn').forEach(function(x){ x.classList.remove('active'); });
-        b.classList.add('active');
-        renderQrDrinks(c);
-      };
-      sf.appendChild(b);
-    });
-    list.appendChild(sf);
-    renderQrDrinks(currentDrinkFilter);
-    return;
-  }
+  <!-- Branch Popup -->
+  <div class="bp-overlay" id="bpOverlay" onclick="if(event.target===this)closeBp()">
+    <div class="bp-sheet">
+      <div class="bp-drag"></div>
+      <div class="bp-head"><img id="bpLogo" src="" alt="" />
+        <h3 id="bpTitle"></h3>
+      </div>
+      <p class="bp-note" id="bpNote"></p>
+      <div class="bp-list" id="bpList"></div>
+      <button class="bp-cancel" onclick="closeBp()">キャンセル</button>
+    </div>
+  </div>
 
-  currentDrinkFilter = 'all';
-  var items = menuData[cat] || [];
-  items.forEach(function(item){
-    var card = document.createElement('div');
-    card.className = 'menu-qr-card';
-    card.innerHTML =
-      '<img class="menu-qr-card-img" src="'+item.image+'" alt="'+item.name+'" loading="lazy" '+
-        'onerror="this.style.background=\'#f5ecd8\'">' +
-      '<div class="menu-qr-card-body">'+
-        (item.badge ? '<span class="menu-qr-badge">'+item.badge+'</span>' : '')+
-        '<h3>'+item.name+'</h3>'+
-        '<p>'+item.description.replace(/<[^>]+>/g,' ')+'</p>'+
-        '<div class="menu-qr-price">'+item.price+'</div>'+
-      '</div>';
-    list.appendChild(card);
-  });
-}
+  <script src="js/jp.index.js"></script>
+  <script>
+    /* ── Live Status JP ── */
+    (function () {
+      var jst = new Date(Date.now() + 9 * 3600000), mins = jst.getUTCHours() * 60 + jst.getUTCMinutes();
+      var bar = document.getElementById('statusBar'), dot = document.getElementById('sDot'), lbl = document.getElementById('sLabel');
+      if (!bar) return;
+      if (mins >= 660 && mins < 870) { bar.className = 'status-bar status-open'; dot.style.background = '#22c55e'; dot.style.boxShadow = '0 0 0 3px rgba(34,197,94,.2)'; lbl.textContent = '● ランチ営業中'; }
+      else if (mins >= 870 && mins < 900) { bar.className = 'status-bar status-break'; dot.style.background = '#f59e0b'; lbl.textContent = '⚡ ラストオーダー 14:30'; }
+      else if (mins >= 900 && mins < 1020) { bar.className = 'status-bar status-break'; dot.style.background = '#f59e0b'; lbl.textContent = '◌ 休憩 15:00 – 17:00'; }
+      else if (mins >= 1020 && mins < 1290) { bar.className = 'status-bar status-open'; dot.style.background = '#22c55e'; dot.style.boxShadow = '0 0 0 3px rgba(34,197,94,.2)'; lbl.textContent = '● ディナー営業中'; }
+      else if (mins >= 1290 && mins < 1320) { bar.className = 'status-bar status-break'; dot.style.background = '#f59e0b'; lbl.textContent = '⚡ ラストオーダー 21:30'; }
+      else { bar.className = 'status-bar status-closed'; dot.style.background = '#dc2626'; lbl.textContent = '◌ 閉店 · 11:00オープン'; }
+    })();
 
-function renderQrDrinks(cat) {
-  var list = document.getElementById('menuList');
-  list.querySelectorAll('.drink-qr-card').forEach(function(el){ el.remove(); });
-  var filtered = cat === 'all' ? drinksData : drinksData.filter(function(d){ return d.category === cat; });
-  filtered.forEach(function(d){
-    var card = document.createElement('div');
-    card.className = 'drink-qr-card';
-    card.innerHTML = '<div><h4>'+d.name+'</h4><p>'+d.description+'</p></div><div class="dq-price">'+d.price+'</div>';
-    list.appendChild(card);
-  });
-}
+    /* ── Allergy JP ── */
+    var ALLERGY = {
+      'バターチキンカレー': ['🥛 乳製品', '🌰 カシューナッツ'],
+      'キーマエッグカレー': ['🥚 卵'],
+      'サモサ (2個)': ['🌾 小麦', '🌰 カシューナッツ'],
+      'モモ (6個)': ['🌾 小麦'],
+      'タンドリーチキン': ['🥛 乳製品'],
+      'ハッピーランチセット': ['🥛 乳製品', '🌾 小麦', '🥚 卵'],
+      '手作りチーズとほうれん草カレー': ['🥛 乳製品'],
+      '手作りチーズとバターカレー': ['🥛 乳製品'],
+    };
 
-qrShow('lunch', document.querySelector('.cat-tab'));
-</script>
+    var drinkEmoji = { beer: '🍺', whiskey: '🥃', cocktail: '🍹', wine: '🍷', plum: '🌸', soft: '🥤' };
+    var drinkCatName = { beer: 'ビール', whiskey: 'ウィスキー', cocktail: 'カクテル', wine: 'ワイン', plum: '梅酒', soft: 'ソフトドリンク' };
+
+    /* ── Lightbox ── */
+    function openLb(item, cat) {
+      document.getElementById('lbImgBg').src = item.image;
+      document.getElementById('lbCat').textContent = cat;
+      document.getElementById('lbName').textContent = item.name;
+      document.getElementById('lbPrice').textContent = item.price;
+      document.getElementById('lbDesc').textContent = item.description.replace(/<[^>]+>/g, ' ');
+      var tags = ALLERGY[item.name], row = document.getElementById('lbAllergyRow'), lbl = document.getElementById('lbAllergyLbl');
+      row.innerHTML = '';
+      if (tags === undefined) { lbl.textContent = 'アレルゲン'; row.innerHTML = '<span class="lb-tag">⚠️ スタッフへご確認ください</span>'; }
+      else if (tags.length) { lbl.textContent = '含まれるアレルゲン'; tags.forEach(function (t) { var s = document.createElement('span'); s.className = 'lb-tag'; s.textContent = t; row.appendChild(s); }); }
+      else { lbl.textContent = ''; }
+      document.getElementById('lbOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLb() { document.getElementById('lbOverlay').classList.remove('open'); document.body.style.overflow = ''; }
+
+    /* ── Branch popup JP ── */
+    var ORDER_LINKS = {
+      uber: {
+        label: 'Uber Eats', logo: 'img/ubber_eats.png', note: 'Uber Eatsで近くの店舗を選んでください',
+        branches: [{ name: '段原店', url: '#', sub: '配達対応' }, { name: '八丁堀店', url: '#', sub: '配達対応' }, { name: '大手町店', url: '#', sub: '配達対応' }]
+      },
+      wolt: {
+        label: 'Wolt', logo: 'img/wolt.png', note: 'Woltで近くの店舗を選んでください',
+        branches: [{ name: '段原店', url: '#', sub: '配達対応' }, { name: '八丁堀店', url: '#', sub: '配達対応' }, { name: '大手町店', url: '#', sub: '配達対応' }]
+      },
+      takeaway: {
+        label: '店舗受け取り', logo: 'img/take_away.png', note: 'ご希望の店舗にお電話でご注文ください',
+        branches: [{ name: '段原店', url: 'tel:0822620004', sub: '082-262-0004', icon: 'phone' }, { name: '八丁堀店', url: 'tel:0822223240', sub: '082-222-3240', icon: 'phone' }, { name: '大手町店', url: 'tel:0822363339', sub: '082-236-3339', icon: 'phone' }]
+      }
+    };
+    function openBp(type) {
+      var d = ORDER_LINKS[type];
+      document.getElementById('bpLogo').src = d.logo;
+      document.getElementById('bpTitle').textContent = d.label;
+      document.getElementById('bpNote').textContent = d.note;
+      var list = document.getElementById('bpList');
+      list.innerHTML = d.branches.map(function (b) { return '<a href="' + b.url + '" ' + (type !== 'takeaway' ? 'target="_blank"' : '') + ' class="bp-item"><div><h4>' + b.name + '</h4><span>' + b.sub + '</span></div><i class="fas fa-' + (b.icon || 'arrow-right') + '"></i></a>'; }).join('');
+      document.getElementById('bpOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeBp() { document.getElementById('bpOverlay').classList.remove('open'); document.body.style.overflow = ''; }
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeLb(); closeBp(); } });
+
+    /* ── Category labels JP ── */
+    var catLabels = { lunch: 'ランチ', curry: 'カレー', 'ala-carte': 'アラカルト', special: 'スペシャル', dessert: 'デザート', drinks: 'ドリンク' };
+
+    var drinkFilter = 'all';
+    function qrShow(cat, btn) {
+      document.querySelectorAll('.cat-tab').forEach(function (b) { b.classList.remove('active'); });
+      if (btn) btn.classList.add('active');
+      var wrap = document.getElementById('menuContent'); wrap.innerHTML = '';
+
+      if (cat === 'order') {
+        var sec = document.createElement('div'); sec.className = 'order-section';
+        sec.innerHTML =
+          '<h2 class="order-title">オンライン注文</h2>' +
+          '<p class="order-sub">ご希望の注文方法をお選びください</p>' +
+          '<div class="order-grid">' +
+          '<div class="order-btn" onclick="openBp(\'uber\')">' +
+          '<img src="img/ubber_eats.png" alt="Uber Eats"/><h4>Uber Eats</h4><p>配達サービス</p>' +
+          '</div>' +
+          '<div class="order-btn" onclick="openBp(\'wolt\')">' +
+          '<img src="img/wolt.png" alt="Wolt"/><h4>Wolt</h4><p>スピード配達</p>' +
+          '</div>' +
+          '</div>' +
+          '<div class="order-btn-full" onclick="openBp(\'takeaway\')">' +
+          '<div class="order-btn-full-left">' +
+          '<img src="img/take_away.png" alt="テイクアウト"/>' +
+          '<div><h4>店舗受け取り</h4><p>事前電話注文 · 店舗でお受け取り</p></div>' +
+          '</div>' +
+          '<i class="fas fa-chevron-right"></i>' +
+          '</div>';
+        wrap.appendChild(sec); return;
+      }
+
+      if (cat === 'drinks') {
+        var sec2 = document.createElement('div'); sec2.className = 'menu-section';
+        var cats = ['all', 'beer', 'whiskey', 'cocktail', 'wine', 'plum', 'soft'];
+        var lbls = { all: 'すべて', beer: '🍺 ビール', whiskey: '🥃 ウィスキー', cocktail: '🍹 カクテル', wine: '🍷 ワイン', plum: '🌸 梅酒', soft: '🥤 ソフト' };
+        var sf = document.createElement('div'); sf.className = 'drink-subfilter';
+        cats.forEach(function (c) {
+          var b = document.createElement('button');
+          b.className = 'dsf-btn' + (c === drinkFilter ? ' active' : '');
+          b.textContent = lbls[c];
+          b.onclick = function () { drinkFilter = c; document.querySelectorAll('.dsf-btn').forEach(function (x) { x.classList.remove('active'); }); b.classList.add('active'); renderDrinks(c, sec2); };
+          sf.appendChild(b);
+        });
+        sec2.appendChild(sf); renderDrinks(drinkFilter, sec2); wrap.appendChild(sec2); return;
+      }
+
+      drinkFilter = 'all';
+      var items = menuData[cat] || [];
+      if (!items.length) { wrap.innerHTML = '<div class="no-res">メニューが見つかりません</div>'; return; }
+      var sec3 = document.createElement('div'); sec3.className = 'menu-section';
+      var grid = document.createElement('div'); grid.className = 'menu-grid';
+      items.forEach(function (item) {
+        var card = document.createElement('div'); card.className = 'dish-card';
+        card.onclick = function () { openLb(item, catLabels[cat] || cat); };
+        card.innerHTML =
+          '<div class="dish-img-wrap">' +
+          '<div class="dish-img-circle">' +
+          '<img src="' + item.image + '" alt="' + item.name + '" loading="lazy" onerror="this.style.opacity=0">' +
+          '</div>' +
+          (item.badge ? '<span class="dish-badge">' + item.badge + '</span>' : '') +
+          '</div>' +
+          '<div class="dish-body">' +
+          '<div class="dish-name">' + item.name + '</div>' +
+          '<div class="dish-desc">' + item.description.replace(/<[^>]+>/g, ' ') + '</div>' +
+          '<div class="dish-footer">' +
+          '<span class="dish-price">' + item.price + '</span>' +
+          '<button class="dish-add" onclick="event.stopPropagation()"><i class="fas fa-plus"></i> 追加</button>' +
+          '</div>' +
+          '</div>';
+        grid.appendChild(card);
+      });
+      sec3.appendChild(grid); wrap.appendChild(sec3);
+    }
+
+    function renderDrinks(cat, container) {
+      container.querySelectorAll('.drink-list,.no-res').forEach(function (el) { el.remove(); });
+      var filtered = cat === 'all' ? drinksData : drinksData.filter(function (d) { return d.category === cat; });
+      if (!filtered.length) { container.insertAdjacentHTML('beforeend', '<div class="no-res">ドリンクが見つかりません</div>'); return; }
+      var list = document.createElement('div'); list.className = 'drink-list';
+      filtered.forEach(function (d) {
+        var el = document.createElement('div'); el.className = 'drink-card';
+        el.innerHTML =
+          '<div class="drink-dot">' + (drinkEmoji[d.category] || '🍹') + '</div>' +
+          '<div class="drink-info">' +
+          '<div class="drink-name">' + d.name + '</div>' +
+          '<div class="drink-desc">' + d.description + '</div>' +
+          '</div>' +
+          '<div class="drink-right">' +
+          '<div class="drink-price">' + d.price + '</div>' +
+          '<span class="drink-cat">' + (drinkCatName[d.category] || d.category) + '</span>' +
+          '</div>';
+        list.appendChild(el);
+      });
+      container.appendChild(list);
+    }
+
+    qrShow('lunch', document.querySelector('.cat-tab'));
+  </script>
 </body>
+
 </html>
