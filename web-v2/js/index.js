@@ -570,35 +570,69 @@ window.findNearest = function() {
 (function(){
   // Force Japan Standard Time (UTC+9)
   var now    = new Date();
-  var jst    = new Date(now.getTime() + (9*60 - now.getTimezoneOffset())*60000);
+  var jst    = new Date(now.getTime() + 9 * 3600000);
   var h      = jst.getUTCHours();
   var m      = jst.getUTCMinutes();
   var mins   = h*60 + m;
 
-  // Time blocks in minutes
+  // Full store timing
+  var STORE_OPEN = 10*60;   // 10:00
+  var STORE_CLOSE = 22*60;  // 22:00
+
+  // Time blocks
   var L_OPEN = 11*60,   L_LO = 14*60+30, L_CLOSE = 15*60;
   var BREAK_END = 17*60;
   var D_OPEN = 17*60,   D_LO = 21*60+30, D_CLOSE = 22*60;
 
   var label, bg, pulse;
-  if      (mins >= L_OPEN  && mins < L_LO)    { label='● Lunch Open';            bg='#16a34a'; pulse=true;  }
-  else if (mins >= L_LO    && mins < L_CLOSE)  { label='⚡ Last Order 14:30';     bg='#d97706'; pulse=true;  }
-  else if (mins >= L_CLOSE && mins < BREAK_END){ label='◌ Break 15:00–17:00';    bg='#6b7280'; pulse=false; }
-  else if (mins >= D_OPEN  && mins < D_LO)     { label='● Dinner Open';           bg='#16a34a'; pulse=true;  }
-  else if (mins >= D_LO    && mins < D_CLOSE)  { label='⚡ Last Order 21:30';     bg='#d97706'; pulse=true;  }
-  else if (mins < L_OPEN)                      { label='◌ Opens 11:00';           bg='#6b7280'; pulse=false; }
-  else                                          { label='◌ Closed · Opens 11:00'; bg='#6b7280'; pulse=false; }
 
-  // JP labels swap
+  // ✅ NEW: Global open/closed check
+  if (mins < STORE_OPEN || mins >= STORE_CLOSE) {
+    label = '◌ Closed · Opens 10:00';
+    bg = '#6b7280';
+    pulse = false;
+  }
+  else if (mins >= STORE_OPEN && mins < L_OPEN) {
+    label = '● Store Open';
+    bg = '#16a34a';
+    pulse = true;
+  }
+  else if (mins >= L_OPEN  && mins < L_LO) {
+    label='● Lunch Open';            
+    bg='#16a34a'; pulse=true;
+  }
+  else if (mins >= L_LO && mins < L_CLOSE) {
+    label='⚡ Last Order 14:30';     
+    bg='#d97706'; pulse=true;
+  }
+  else if (mins >= L_CLOSE && mins < BREAK_END){
+    label='◌ Break 15:00–17:00';    
+    bg='#6b7280'; pulse=false;
+  }
+  else if (mins >= D_OPEN && mins < D_LO){
+    label='● Dinner Open';           
+    bg='#16a34a'; pulse=true;
+  }
+  else if (mins >= D_LO && mins < D_CLOSE){
+    label='⚡ Last Order 21:30';     
+    bg='#d97706'; pulse=true;
+  }
+  else {
+    label='◌ Closed';
+    bg='#6b7280'; pulse=false;
+  }
+
+  // JP labels
   var isJP = document.documentElement.lang === 'ja';
   if(isJP){
-    if(label.includes('Lunch Open'))       label='● ランチ営業中';
+    if(label.includes('Store Open'))     label='● 営業中';
+    else if(label.includes('Lunch Open')) label='● ランチ営業中';
     else if(label.includes('Last Order 14')) label='⚡ ラストオーダー 14:30';
-    else if(label.includes('Break'))        label='◌ 休憩 15:00–17:00';
-    else if(label.includes('Dinner Open'))  label='● ディナー営業中';
+    else if(label.includes('Break'))     label='◌ 休憩 15:00–17:00';
+    else if(label.includes('Dinner Open')) label='● ディナー営業中';
     else if(label.includes('Last Order 21')) label='⚡ ラストオーダー 21:30';
-    else if(label.includes('Opens 11'))     label='◌ 11:00 オープン';
-    else                                    label='◌ 閉店 · 11:00オープン';
+    else if(label.includes('Closed · Opens')) label='◌ 閉店 · 10:00オープン';
+    else if(label.includes('Closed'))    label='◌ 閉店';
   }
 
   var badge = document.createElement('div');
@@ -617,5 +651,6 @@ window.findNearest = function() {
       '#hours-badge{animation:badgePulse 2s infinite}';
     document.head.appendChild(style);
   }
+
   document.body.appendChild(badge);
 })();
