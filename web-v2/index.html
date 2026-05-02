@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NAMASTE — 本格インド・ネパール料理レストラン 広島</title>
+  <meta name="description" content="広島のナマステインドレストラン — 段原、八丁堀、大手町で本格インド・ネパール料理をご提供。イートイン、テイクアウト、Uber Eats・Wolt配達対応。" />
+  <link rel="icon" type="image/x-icon" href="img/logo.png" />
+  <link rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="css/hamburg.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script defer src="js/hamburg.js"></script>
+  <script defer src="js/jp.index.js"></script>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header id="site-header">
+  <div class="header-container">
+    <a href="#home" class="logo-link" aria-label="ナマステ ホーム">
+      <img src="img/logo.png" alt="ナマステ ロゴ" class="logo" />
+      <div class="logo-text">
+        NAMASTE
+        <span>インド・ネパール料理レストラン</span>
+      </div>
+    </a>
+
+    <nav aria-label="メインナビゲーション">
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <ul id="nav-list">
+        <li><a href="#home">ホーム</a></li>
+        <li><a href="#about_us">私たちについて</a></li>
+        <li><a href="#menu">メニュー</a></li>
+        <li><a href="#order">オンライン注文</a></li>
+        <li><a href="#locations">店舗情報</a></li>
+        <li class="mobile-language">
+          <a href="english.page.html" class="language-button">🇬🇧 English</a>
+        </li>
+      </ul>
+
+      <a href="english.page.html" class="language-button desktop-language">🇬🇧 English</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <img id="heroBg" src="img/main-image.jpg" alt="ナマステレストラン — 本格インド料理" />
+  </div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <span class="hero-badge">✦ 広島 · 1998年創業 ✦</span>
+    <h1 class="hero-title">
+      インドの味の<br /><em>芸術</em>
+    </h1>
+    <p class="hero-tagline">
+      アーユルヴェーダの知恵が生み出す本格インド・ネパール料理 —
+      広島の3店舗で、忘れられない体験をお届けします。
+    </p>
+    <div class="hero-cta-group">
+      <a href="#menu" class="btn-primary">
+        <i class="fas fa-utensils"></i> メニューを見る
+      </a>
+      <a href="#order" class="btn-secondary">
+        <i class="fas fa-motorcycle"></i> オンライン注文
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint" aria-hidden="true">
+    <span>スクロール</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FEATURES STRIP
+     ============================================================ -->
+<div class="features-strip" aria-hidden="true">
+  <div class="features-strip-inner">
+    <div class="feature-item">
+      <span class="feature-icon"><i class="fas fa-leaf"></i></span>
+      <div class="feature-text">
+        <strong>アーユルヴェーダ料理</strong>
+        <span>40種類以上のスパイス</span>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon"><i class="fas fa-store"></i></span>
+      <div class="feature-text">
+        <strong>3店舗展開</strong>
+        <span>広島市内</span>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon"><i class="fas fa-clock"></i></span>
+      <div class="feature-text">
+        <strong>毎日営業</strong>
+        <span>ランチ 11:00〜 · ディナー 17:00〜</span>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon"><i class="fas fa-heart"></i></span>
+      <div class="feature-text">
+        <strong>ハラール・ベジタリアン</strong>
+        <span>事前相談で対応可能</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MENU SECTION
+     ============================================================ -->
+<section id="menu" aria-labelledby="menu-heading">
+  <div class="menu-header reveal">
+    <h2 class="section-title" id="menu-heading">メニュー</h2>
+    <span class="gold-line"></span>
+    <p class="section-subtitle">芳醇なカレーからタンドール料理まで — 毎日新鮮に調理しております</p>
+  </div>
+
+  <div class="menu-categories" role="tablist" aria-label="メニューカテゴリ">
+    <button onclick="showCategory('lunch')" class="active" role="tab">
+      <i class="fas fa-sun"></i> ランチ
+    </button>
+    <button onclick="showCategory('curry')" role="tab">
+      <i class="fas fa-fire"></i> カレー
+    </button>
+    <button onclick="showCategory('ala-carte')" role="tab">
+      <i class="fas fa-star"></i> アラカルト
+    </button>
+    <button onclick="showCategory('special')" role="tab">
+      <i class="fas fa-crown"></i> スペシャルセット
+    </button>
+    <button onclick="showCategory('dessert')" role="tab">
+      <i class="fas fa-ice-cream"></i> デザート
+    </button>
+    <button onclick="showDrinksCategory(this)" role="tab">
+      <i class="fas fa-glass-cheers"></i> ドリンク
+    </button>
+  </div>
+
+  <!-- Food items grid -->
+  <div id="menu-items" style="display:grid;"></div>
+
+  <!-- Drinks section -->
+  <div id="drinks-items" style="display:none;">
+    <div class="drinks-filter container">
+      <button class="filter-btn active" data-cat="all">
+        <i class="fas fa-star category-icon"></i> すべて
+      </button>
+      <button class="filter-btn" data-cat="beer">
+        <i class="fas fa-beer category-icon"></i> ビール
+      </button>
+      <button class="filter-btn" data-cat="whiskey">
+        <i class="fas fa-whiskey-glass category-icon"></i> ウィスキー
+      </button>
+      <button class="filter-btn" data-cat="cocktail">
+        <i class="fas fa-cocktail category-icon"></i> カクテル
+      </button>
+      <button class="filter-btn" data-cat="wine">
+        <i class="fas fa-wine-bottle category-icon"></i> ワイン
+      </button>
+      <button class="filter-btn" data-cat="plum">
+        <i class="fas fa-wine-glass category-icon"></i> 梅酒
+      </button>
+      <button class="filter-btn" data-cat="soft">
+        <i class="fas fa-glass-water category-icon"></i> ソフトドリンク
+      </button>
+    </div>
+    <div id="drinksContainer"></div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- ============================================================
+     ABOUT SECTION
+     ============================================================ -->
+<div id="about_us">
+  <!-- Experience -->
+  <section class="about-section" id="about-experience">
+    <div class="about-content reveal">
+      <div class="about-text">
+        <span class="eyebrow">私たちの物語</span>
+        <h2>15年のインド料理への情熱</h2>
+        <p>
+          広島で15年間インド・ネパール料理に携わり、ここでしか味わえないインド・ネパール料理を追求し、現在3店舗を運営しています。
+        </p>
+        <p>
+          私たちのレストランではアーユルヴェーダ料理に重点を置いており、疲れた体を癒し、自己治癒力を養うことを願っています。事前にご連絡いただければ、ハラールやベジタリアンのお客様にも対応いたします。
+        </p>
+      </div>
+      <div class="about-image-wrap">
+        <img src="img/Ecperence.jpg" alt="料理への情熱と技術" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Ayurveda -->
+  <section class="about-section" id="about-ayurveda">
+    <div class="about-content reverse reveal">
+      <div class="about-text">
+        <span class="eyebrow">私たちの哲学</span>
+        <h2>アーユルヴェーダに挑戦</h2>
+        <p>
+          インド発祥のアーユルヴェーダは、体の本来持つ治癒力を重視し、食事を通じてバランスを取り戻すことに重点を置いています。ナマステでは、十数種類のスパイスと多種多様な野菜を使用した料理を提供し、お客様の健康に貢献することを目指しています。
+        </p>
+        <p style="font-size:0.82rem; color: var(--text-light); font-style: italic;">
+          ※ メニューには卵、乳製品、小麦、大豆、サラダ油、カシューナッツ、ココナッツ、トマト等が含まれます。アレルギーをお持ちの方はスタッフにご相談ください。
+        </p>
+      </div>
+      <div class="about-image-wrap">
+        <img src="img/Aayurveda.jpg" alt="アーユルヴェーダのスパイスと食材" loading="lazy" />
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- New Store Notice -->
+<div class="relocation-section reveal">
+  <div class="container">
+    <h2 class="section-title" style="color:var(--white);">新店舗 — 大手町</h2>
+    <span class="gold-line"></span>
+    <p>
+      新しい改善された場所に移転することをお知らせいたします。<br />
+      新しい住所は：<strong>〒730-0051 広島市中区大手町4丁目1-1<br />
+      大手町平和ビル 102号</strong><br />
+      広島平和記念公園近くの新店舗で皆様をお待ちしております！
+    </p>
+    <div class="relocation-img">
+      <img src="img/NEW_store_1.jpeg" alt="大手町新店舗外観" loading="lazy" />
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider" />
+
+<!-- ============================================================
+     RESERVATIONS
+     ============================================================ -->
+<section class="reservations-section" aria-labelledby="reservations-heading">
+  <div class="container">
+    <h2 class="section-title reveal" id="reservations-heading">ご予約</h2>
+    <span class="gold-line"></span>
+    <p class="section-subtitle reveal">クリックでお電話いただけます — ご来店をお待ちしております</p>
+  </div>
+
+  <!-- Geo detect -->
+<div class="container" style="text-align:center;">
+  <button class="geo-btn" id="geoBtn" onclick="findNearest()">
+    <i class="fas fa-location-crosshairs"></i> Find My Nearest Branch
+  </button>
+</div>
+<div class="container">
+  <div class="nearest-banner" id="nearestBanner">
+    <i class="fas fa-star"></i>
+    <span id="nearestText">Detecting…</span>
+  </div>
+</div>
+
+  <div class="branches-grid">
+    <!-- Dambara -->
+    <div class="branch-card reveal">
+      <h3><i class="fas fa-map-marker-alt" style="color:var(--crimson);margin-right:8px;"></i>段原店</h3>
+      <p class="branch-addr">広島市南区段原南2丁目8-11</p>
+      <div class="branch-hours">
+        <span><i class="fas fa-sun"></i> ランチ: 11:00 – 15:00 (L.O. 14:00)</span>
+        <span><i class="fas fa-moon"></i> ディナー: 17:00 – 22:00 (L.O. 21:00)</span>
+      </div>
+      <a href="tel:0822620004" class="call-button">
+        <i class="fas fa-phone-volume"></i> 082-262-0004
+      </a>
+    </div>
+
+    <!-- Hatchobori -->
+    <div class="branch-card reveal">
+      <h3><i class="fas fa-map-marker-alt" style="color:var(--crimson);margin-right:8px;"></i>八丁堀店</h3>
+      <p class="branch-addr">広島市中区八丁堀11-13 八丁堀アロービル3階</p>
+      <div class="branch-hours">
+        <span><i class="fas fa-sun"></i> ランチ: 11:00 – 15:00 (L.O. 14:00)</span>
+        <span><i class="fas fa-moon"></i> ディナー: 17:00 – 22:00 (L.O. 21:00)</span>
+      </div>
+      <a href="tel:0822223240" class="call-button">
+        <i class="fas fa-phone-volume"></i> 082-222-3240
+      </a>
+    </div>
+
+    <!-- Otemachi -->
+    <div class="branch-card reveal">
+      <h3>
+        <i class="fas fa-map-marker-alt" style="color:var(--crimson);margin-right:8px;"></i>
+        大手町店 <span style="font-size:0.7rem;background:var(--gold);color:#000;padding:2px 8px;border-radius:10px;margin-left:6px;font-weight:700;">新店</span>
+      </h3>
+      <p class="branch-addr">〒730-0051 広島市中区大手町4丁目1-1 大手町平和ビル102号</p>
+      <div class="branch-hours">
+        <span><i class="fas fa-sun"></i> ランチ: 11:00 – 15:00 (L.O. 14:00)</span>
+        <span><i class="fas fa-moon"></i> ディナー: 17:00 – 22:00 (L.O. 21:00)</span>
+      </div>
+      <a href="tel:0822363339" class="call-button">
+        <i class="fas fa-phone-volume"></i> 082-236-3339
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- ============================================================
+     ONLINE ORDER
+     ============================================================ -->
+<section class="order-section" id="order" aria-labelledby="order-heading">
+  <div class="container">
+    <h2 class="section-title reveal" id="order-heading">オンライン注文</h2>
+    <span class="gold-line"></span>
+    <p class="section-subtitle reveal">ご自宅でナマステの料理をお楽しみください</p>
+  </div>
+
+  <div class="order-cards">
+    <a href="#" class="order-card reveal">
+      <img src="img/ubber_eats.png" alt="Uber Eats" class="order-card-img" loading="lazy" />
+      <h3>Uber Eats</h3>
+      <p>ドアまで迅速にお届け</p>
+      <span class="order-arrow"><i class="fas fa-arrow-right"></i></span>
+    </a>
+    <a href="#" class="order-card reveal">
+      <img src="img/wolt.png" alt="Wolt" class="order-card-img" loading="lazy" />
+      <h3>Wolt</h3>
+      <p>スピード配達サービス</p>
+      <span class="order-arrow"><i class="fas fa-arrow-right"></i></span>
+    </a>
+    <a href="#" class="order-card reveal">
+      <img src="img/take_away.png" alt="テイクアウト" class="order-card-img" loading="lazy" />
+      <h3>店舗受け取り</h3>
+      <p>事前注文でスムーズに受け取り</p>
+      <span class="order-arrow"><i class="fas fa-arrow-right"></i></span>
+    </a>
+  </div>
+
+  <!-- Payment methods -->
+  <div class="container" style="margin-top:2.5em;">
+    <p class="section-subtitle" style="margin-bottom:1em;">お支払い方法</p>
+    <div class="payment-row reveal">
+      <div class="payment-item">
+        <img src="img/paypay.png" alt="PayPay" loading="lazy" />
+        <span>PayPay</span>
+      </div>
+      <div class="payment-item" style="padding:0 20px;border-left:1px solid var(--cream-dark);border-right:1px solid var(--cream-dark);">
+        <img src="img/cash_pay.jpg" alt="現金" loading="lazy" />
+        <span>現金</span>
+      </div>
+      <div class="payment-item">
+        <div style="width:50px;height:50px;background:var(--charcoal);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+          <i class="fas fa-credit-card" style="color:white;font-size:1.3rem;"></i>
+        </div>
+        <span>カード</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- ============================================================
+     LOCATIONS
+     ============================================================ -->
+<section class="locations-section" id="locations" aria-labelledby="locations-heading">
+  <div class="container">
+    <h2 class="section-title reveal" id="locations-heading">店舗情報</h2>
+    <span class="gold-line"></span>
+    <p class="section-subtitle reveal">広島市内3店舗 — 毎日営業中</p>
+  </div>
+
+  <div class="container">
+    <!-- Store 1: Dambara -->
+    <div class="location-card reveal">
+      <div class="location-info">
+        <span class="location-badge">店舗1</span>
+        <h3>段原店</h3>
+        <address>広島市南区段原南2丁目8-11</address>
+        <div class="location-hours">
+          <strong>営業時間</strong>
+          ランチ: 11:00–15:00 (L.O. 14:00)<br />
+          ディナー: 17:00–22:00 (L.O. 21:00)<br />
+          定休日: なし
+        </div>
+        <div class="location-store-imgs">
+          <img src="img/store_damnbara.jpg" alt="段原店" loading="lazy" />
+        </div>
+        <a href="tel:0822620004" class="call-button" style="margin-top:1.25em;">
+          <i class="fas fa-phone"></i> 082-262-0004
+        </a>
+      </div>
+      <div class="location-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13170.638243427513!2d132.4585525871582!3d34.38457799999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x355aa1fa2b9f9dbb%3A0xc8619b142b83a390!2sNamaste%20Indian%20Restaurant!5e0!3m2!1sen!2snp!4v1722156039925!5m2!1sen!2snp"
+          title="段原店 地図"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+
+    <!-- Store 2: Hatchobori -->
+    <div class="location-card reveal">
+      <div class="location-info">
+        <span class="location-badge">店舗2</span>
+        <h3>八丁堀店</h3>
+        <address>広島市中区八丁堀11-13 八丁堀アロービル3階</address>
+        <div class="location-hours">
+          <strong>営業時間</strong>
+          ランチ: 11:00–15:00 (L.O. 14:00)<br />
+          ディナー: 17:00–22:00 (L.O. 21:00)<br />
+          定休日: なし
+        </div>
+        <div class="location-store-imgs">
+          <img src="img/New_location.jpg" alt="八丁堀店" loading="lazy" />
+        </div>
+        <a href="tel:0822223240" class="call-button" style="margin-top:1.25em;">
+          <i class="fas fa-phone"></i> 082-222-3240
+        </a>
+      </div>
+      <div class="location-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13169.012060725228!2d132.4432983!3d34.3949144!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x355aa1fa2b753d3b%3A0x86414e2672b36241!2sNamaste!5e0!3m2!1sen!2snp!4v1722155932409!5m2!1sen!2snp"
+          title="八丁堀店 地図"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+
+    <!-- Store 3: Otemachi -->
+    <div class="location-card reveal">
+      <div class="location-info">
+        <span class="location-badge" style="background:var(--gold);color:#000;border-color:var(--gold);">店舗3 — 新店</span>
+        <h3>大手町店</h3>
+        <address>〒730-0051 広島市中区大手町4丁目1-1 大手町平和ビル102号</address>
+        <div class="location-hours">
+          <strong>営業時間</strong>
+          ランチ: 11:00–15:00 (L.O. 14:00)<br />
+          ディナー: 17:00–22:00 (L.O. 21:00)<br />
+          広島平和記念公園近く · 定休日: なし
+        </div>
+        <div class="location-store-imgs">
+          <img src="img/NEW_store_1.jpeg" alt="大手町新店舗" loading="lazy" />
+        </div>
+        <a href="tel:0822363339" class="call-button" style="margin-top:1.25em;">
+          <i class="fas fa-phone"></i> 082-236-3339
+        </a>
+      </div>
+      <div class="location-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3292.602863125529!2d132.45392719999998!3d34.3860197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x355aa3bfef8ae449%3A0x4b156fe8a578f52!2sIndian%20Restaurant%20Namaste!5e0!3m2!1sen!2snp!4v1754825422351!5m2!1sen!2snp"
+          title="大手町店 地図"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SITE FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <!-- Brand -->
+    <div class="footer-brand">
+      <img src="img/logo.png" alt="ナマステ ロゴ" />
+      <p>1998年より広島でアーユルヴェーダの知恵を活かした本格インド・ネパール料理をご提供しています。</p>
+      <p>ハラール・ベジタリアン対応（要事前連絡）</p>
+      <div class="social-links">
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="TripAdvisor"><i class="fab fa-tripadvisor"></i></a>
+      </div>
+    </div>
+
+    <!-- Branches -->
+    <div class="footer-col">
+      <h4>店舗情報</h4>
+      <div class="footer-branch">
+        <h5><i class="fas fa-map-marker-alt"></i> 段原店</h5>
+        <p><i class="fas fa-phone"></i> 082-262-0004</p>
+        <p><i class="fas fa-envelope"></i> namastedambara@gmail.com</p>
+      </div>
+      <div class="footer-branch">
+        <h5><i class="fas fa-map-marker-alt"></i> 八丁堀店</h5>
+        <p><i class="fas fa-phone"></i> 082-222-3240</p>
+        <p><i class="fas fa-envelope"></i> namaste.hatchobori.ten@gmail.com</p>
+      </div>
+      <div class="footer-branch">
+        <h5><i class="fas fa-map-marker-alt"></i> 大手町店 <span style="color:var(--gold);font-size:0.7rem;">新店</span></h5>
+        <p><i class="fas fa-phone"></i> 082-241-7633</p>
+        <p><i class="fas fa-envelope"></i> namasteotemachi@gmail.com</p>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-col">
+      <h4>クイックリンク</h4>
+      <nav class="footer-links" aria-label="フッターナビゲーション">
+        <a href="#home"><i class="fas fa-chevron-right"></i> ホーム</a>
+        <a href="#menu"><i class="fas fa-chevron-right"></i> メニュー</a>
+        <a href="#order"><i class="fas fa-chevron-right"></i> オンライン注文</a>
+        <a href="#locations"><i class="fas fa-chevron-right"></i> 店舗情報</a>
+        <a href="#about_us"><i class="fas fa-chevron-right"></i> 私たちについて</a>
+        <a href="english.page.html"><i class="fas fa-chevron-right"></i> English</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>
+      &copy; 1998–<script>document.write(new Date().getFullYear())</script>
+      ナマステインドレストラン 広島。All rights reserved.
+    </p>
+  </div>
+</footer>
+
+<!-- Back to Top -->
+<button id="page-top" aria-label="ページトップへ戻る" title="ページトップへ">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+</body>
+</html>

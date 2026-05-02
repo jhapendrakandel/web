@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NAMASTE — Authentic Indian &amp; Nepalese Restaurant, Hiroshima</title>
+  <meta name="description" content="Namaste Indian Restaurant in Hiroshima — serving authentic Indian and Nepalese cuisine at Dambara, Hatchobori, and Otemachi. Dine-in, takeaway, Uber Eats and Wolt delivery." />
+  <link rel="icon" type="image/x-icon" href="img/logo.png" />
+  <link rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="css/hamburg.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script defer src="js/hamburg.js"></script>
+  <script defer src="js/index.js"></script>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header id="site-header">
+  <div class="header-container">
+    <a href="#home" class="logo-link" aria-label="Namaste Home">
+      <img src="img/logo.png" alt="Namaste Logo" class="logo" />
+      <div class="logo-text">
+        NAMASTE
+        <span>Indian &amp; Nepalese Restaurant</span>
+      </div>
+    </a>
+
+    <nav aria-label="Main navigation">
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <ul id="nav-list">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about_us">About</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#order">Order</a></li>
+        <li><a href="#locations">Locations</a></li>
+        <li class="mobile-language">
+          <a href="index.html" class="language-button">🇯🇵 日本語</a>
+        </li>
+      </ul>
+
+      <a href="index.html" class="language-button desktop-language">🇯🇵 日本語</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <img id="heroBg" src="img/main-image.jpg" alt="Namaste Restaurant — authentic Indian cuisine" />
+  </div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <span class="hero-badge">✦ Hiroshima · Est. 1998 ✦</span>
+    <h1 class="hero-title">
+      The Art of<br /><em>Indian Flavour</em>
+    </h1>
+    <p class="hero-tagline">
+      Authentic Indian &amp; Nepalese cuisine crafted with Ayurvedic wisdom —
+      three locations across Hiroshima, one unforgettable experience.
+    </p>
+    <div class="hero-cta-group">
+      <a href="#menu" class="btn-primary">
+        <i class="fas fa-utensils"></i> View Menu
+      </a>
+      <a href="#order" class="btn-secondary">
+        <i class="fas fa-motorcycle"></i> Order Online
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FEATURES STRIP
+     ============================================================ -->
+<div class="features-strip" aria-hidden="true">
+  <div class="features-strip-inner">
+    <div class="feature-item">
+      <span class="feature-icon"><i class="fas fa-leaf"></i></span>
+      <div class="feature-text">
+        <strong>Ayurvedic Cuisine</strong>
+        <span>40+ authentic spices</span>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon"><i class="fas fa-store"></i></span>
+      <div class="feature-text">
+        <strong>3 Locations</strong>
+        <span>Across Hiroshima</span>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon"><i class="fas fa-clock"></i></span>
+      <div class="feature-text">
+        <strong>Open Daily</strong>
+        <span>Lunch 11:00 · Dinner 17:00</span>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon"><i class="fas fa-heart"></i></span>
+      <div class="feature-text">
+        <strong>Halal &amp; Vegetarian</strong>
+        <span>Available on request</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MENU SECTION
+     ============================================================ -->
+<section id="menu" aria-labelledby="menu-heading">
+  <div class="menu-header reveal">
+    <h2 class="section-title" id="menu-heading">Our Menu</h2>
+    <span class="gold-line"></span>
+    <p class="section-subtitle">From aromatic curries to tandoor specialities — crafted fresh daily</p>
+  </div>
+
+  <div class="menu-categories" role="tablist" aria-label="Menu categories">
+    <button onclick="showCategory('lunch')" class="active" role="tab">
+      <i class="fas fa-sun"></i> Lunch
+    </button>
+    <button onclick="showCategory('curry')" role="tab">
+      <i class="fas fa-fire"></i> Curry
+    </button>
+    <button onclick="showCategory('ala-carte')" role="tab">
+      <i class="fas fa-star"></i> À La Carte
+    </button>
+    <button onclick="showCategory('special')" role="tab">
+      <i class="fas fa-crown"></i> Special Sets
+    </button>
+    <button onclick="showCategory('dessert')" role="tab">
+      <i class="fas fa-ice-cream"></i> Desserts
+    </button>
+    <button onclick="showDrinksCategory(this)" role="tab">
+      <i class="fas fa-glass-cheers"></i> Drinks
+    </button>
+  </div>
+
+  <!-- Food items grid -->
+  <div id="menu-items" style="display:grid;"></div>
+
+  <!-- Drinks section -->
+  <div id="drinks-items" style="display:none;">
+    <div class="drinks-filter container">
+      <button class="filter-btn active" data-cat="all">
+        <i class="fas fa-star category-icon"></i> All
+      </button>
+      <button class="filter-btn" data-cat="beer">
+        <i class="fas fa-beer category-icon"></i> Beer
+      </button>
+      <button class="filter-btn" data-cat="whiskey">
+        <i class="fas fa-whiskey-glass category-icon"></i> Whiskey
+      </button>
+      <button class="filter-btn" data-cat="cocktail">
+        <i class="fas fa-cocktail category-icon"></i> Cocktails
+      </button>
+      <button class="filter-btn" data-cat="wine">
+        <i class="fas fa-wine-bottle category-icon"></i> Wine
+      </button>
+      <button class="filter-btn" data-cat="plum">
+        <i class="fas fa-wine-glass category-icon"></i> Plum Wine
+      </button>
+      <button class="filter-btn" data-cat="soft">
+        <i class="fas fa-glass-water category-icon"></i> Soft Drinks
+      </button>
+    </div>
+    <div id="drinksContainer"></div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- DISH CAROUSEL -->
+<section class="carousel-section">
+  <h2 class="section-title" style="text-align:center;">Our Most Loved Dishes</h2>
+  <span class="gold-line"></span>
+  <div class="carousel-track-wrap">
+    <div class="carousel-track" id="carouselTrack">
+      <!-- Cards injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT SECTION
+     ============================================================ -->
+<div id="about_us">
+  <!-- Experience -->
+  <section class="about-section" id="about-experience">
+    <div class="about-content reveal">
+      <div class="about-text">
+        <span class="eyebrow">Our Story</span>
+        <h2>15 Years of Passion for Indian Cuisine</h2>
+        <p>
+          With 15 years of experience in Indian and Nepalese cuisine in Hiroshima,
+          we have pursued unique flavours you can only find here — now operating
+          across three locations.
+        </p>
+        <p>
+          Our restaurant focuses on Ayurvedic cuisine, hoping to heal tired bodies
+          and nurture self-healing abilities. With prior notice, we can accommodate
+          halal and vegetarian requests.
+        </p>
+      </div>
+      <div class="about-image-wrap">
+        <img src="img/Ecperence.jpg" alt="Our experience and culinary craft" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Ayurveda -->
+  <section class="about-section" id="about-ayurveda">
+    <div class="about-content reverse reveal">
+      <div class="about-text">
+        <span class="eyebrow">Our Philosophy</span>
+        <h2>Challenging Ayurveda</h2>
+        <p>
+          Originating in India, Ayurveda emphasises the body's natural healing
+          abilities and restoring balance through diet. At Namaste, we contribute
+          to our customers' health through dishes made with dozens of spices and
+          diverse vegetables.
+        </p>
+        <p style="font-size:0.82rem; color: var(--text-light); font-style: italic;">
+          Our menu contains eggs, dairy, wheat, soy, salad oil, cashews, coconut,
+          and tomatoes. Customers with allergies should take caution — please ask
+          our staff for details.
+        </p>
+      </div>
+      <div class="about-image-wrap">
+        <img src="img/Aayurveda.jpg" alt="Ayurvedic ingredients and spices" loading="lazy" />
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- New Store Notice -->
+<div class="relocation-section reveal">
+  <div class="container">
+    <h2 class="section-title" style="color:var(--white);">New Store — Otemachi</h2>
+    <span class="gold-line"></span>
+    <p>
+      We are pleased to announce our newest location at:<br />
+      <strong>〒730-0051 Hiroshima, Naka Ward, Otemachi, 4 Chome−1−1<br />
+      Otemachi Heiwa Building 102号</strong><br />
+      Located near Hiroshima Peace Memorial Park. We look forward to welcoming you!
+    </p>
+    <div class="relocation-img">
+      <img src="img/NEW_store_1.jpeg" alt="New Otemachi store exterior" loading="lazy" />
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider" />
+
+<!-- ============================================================
+     RESERVATIONS
+     ============================================================ -->
+<section class="reservations-section" aria-labelledby="reservations-heading">
+  <div class="container">
+    <h2 class="section-title reveal" id="reservations-heading">Reservations</h2>
+    <span class="gold-line"></span>
+    <p class="section-subtitle reveal">Click to call — we'd love to welcome you</p>
+  </div>
+
+  <!-- Geo detect -->
+<div class="container" style="text-align:center;">
+  <button class="geo-btn" id="geoBtn" onclick="findNearest()">
+    <i class="fas fa-location-crosshairs"></i> Find My Nearest Branch
+  </button>
+</div>
+<div class="container">
+  <div class="nearest-banner" id="nearestBanner">
+    <i class="fas fa-star"></i>
+    <span id="nearestText">Detecting…</span>
+  </div>
+</div>
+
+  <div class="branches-grid">
+    <!-- Dambara -->
+    <div class="branch-card reveal">
+      <h3><i class="fas fa-map-marker-alt" style="color:var(--crimson);margin-right:8px;"></i>Dambara</h3>
+      <p class="branch-addr">8-11 Dambara Minami 2-chome, Minami Ward, Hiroshima City</p>
+      <div class="branch-hours">
+        <span><i class="fas fa-sun"></i> Lunch: 11:00 – 15:00 (L.O. 14:00)</span>
+        <span><i class="fas fa-moon"></i> Dinner: 17:00 – 22:00 (L.O. 21:00)</span>
+      </div>
+      <a href="tel:0822620004" class="call-button">
+        <i class="fas fa-phone-volume"></i> 082-262-0004
+      </a>
+    </div>
+
+    <!-- Hatchobori -->
+    <div class="branch-card reveal">
+      <h3><i class="fas fa-map-marker-alt" style="color:var(--crimson);margin-right:8px;"></i>Hatchobori</h3>
+      <p class="branch-addr">3F Hatchobori Arrow Building, 11-13 Hatchobori, Naka Ward, Hiroshima City</p>
+      <div class="branch-hours">
+        <span><i class="fas fa-sun"></i> Lunch: 11:00 – 15:00 (L.O. 14:00)</span>
+        <span><i class="fas fa-moon"></i> Dinner: 17:00 – 22:00 (L.O. 21:00)</span>
+      </div>
+      <a href="tel:0822223240" class="call-button">
+        <i class="fas fa-phone-volume"></i> 082-222-3240
+      </a>
+    </div>
+
+    <!-- Otemachi -->
+    <div class="branch-card reveal">
+      <h3>
+        <i class="fas fa-map-marker-alt" style="color:var(--crimson);margin-right:8px;"></i>
+        Otemachi <span style="font-size:0.7rem;background:var(--gold);color:#000;padding:2px 8px;border-radius:10px;margin-left:6px;font-weight:700;">NEW</span>
+      </h3>
+      <p class="branch-addr">Otemachi Heiwa Building 102, 4-1-1 Otemachi, Naka Ward, Hiroshima City</p>
+      <div class="branch-hours">
+        <span><i class="fas fa-sun"></i> Lunch: 11:00 – 15:00 (L.O. 14:00)</span>
+        <span><i class="fas fa-moon"></i> Dinner: 17:00 – 22:00 (L.O. 21:00)</span>
+      </div>
+      <a href="tel:0822363339" class="call-button">
+        <i class="fas fa-phone-volume"></i> 082-236-3339
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- ============================================================
+     ONLINE ORDER
+     ============================================================ -->
+<section class="order-section" id="order" aria-labelledby="order-heading">
+  <div class="container">
+    <h2 class="section-title reveal" id="order-heading">Order Online</h2>
+    <span class="gold-line"></span>
+    <p class="section-subtitle reveal">Enjoy Namaste from the comfort of your home</p>
+  </div>
+
+  <div class="order-card reveal" onclick="openOrderPopup('uber')" style="cursor:pointer;">
+  <img src="img/ubber_eats.png" alt="Uber Eats" class="order-card-img" loading="lazy" />
+  <h3>Uber Eats</h3>
+  <p>Fast delivery to your door</p>
+  <span class="order-arrow"><i class="fas fa-arrow-right"></i></span>
+</div>
+<div class="order-card reveal" onclick="openOrderPopup('wolt')" style="cursor:pointer;">
+  <img src="img/wolt.png" alt="Wolt" class="order-card-img" loading="lazy" />
+  <h3>Wolt</h3>
+  <p>Quick delivery service</p>
+  <span class="order-arrow"><i class="fas fa-arrow-right"></i></span>
+</div>
+<div class="order-card reveal" onclick="openOrderPopup('takeaway')" style="cursor:pointer;">
+  <img src="img/take_away.png" alt="Pickup" class="order-card-img" loading="lazy" />
+  <h3>In-Store Pickup</h3>
+  <p>Order ahead for collection</p>
+  <span class="order-arrow"><i class="fas fa-arrow-right"></i></span>
+</div>
+
+  <!-- Payment methods -->
+  <div class="container" style="margin-top:2.5em;">
+    <p class="section-subtitle" style="margin-bottom:1em;">We accept</p>
+    <div class="payment-row reveal">
+      <div class="payment-item">
+        <img src="img/paypay.png" alt="PayPay" loading="lazy" />
+        <span>PayPay</span>
+      </div>
+      <div class="payment-item" style="padding:0 20px;border-left:1px solid var(--cream-dark);border-right:1px solid var(--cream-dark);">
+        <img src="img/cash_pay.jpg" alt="Cash" loading="lazy" />
+        <span>Cash</span>
+      </div>
+      <div class="payment-item">
+        <div style="width:50px;height:50px;background:var(--charcoal);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+          <i class="fas fa-credit-card" style="color:white;font-size:1.3rem;"></i>
+        </div>
+        <span>Card</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- ============================================================
+     LOCATIONS (FOOTER)
+     ============================================================ -->
+<section class="locations-section" id="locations" aria-labelledby="locations-heading">
+  <div class="container">
+    <h2 class="section-title reveal" id="locations-heading">Find Us</h2>
+    <span class="gold-line"></span>
+    <p class="section-subtitle reveal">Three locations across Hiroshima — all open daily</p>
+  </div>
+
+  <!-- Store 1: Dambara -->
+  <div class="container">
+    <div class="location-card reveal">
+      <div class="location-info">
+        <span class="location-badge">Store 1</span>
+        <h3>Dambara</h3>
+        <address>8-11 Dambara Minami 2-chome, Minami Ward, Hiroshima City</address>
+        <div class="location-hours">
+          <strong>Business Hours</strong>
+          Lunch: 11:00–15:00 (L.O. 14:00)<br />
+          Dinner: 17:00–22:00 (L.O. 21:00)<br />
+          Closed: None
+        </div>
+        <div class="location-store-imgs">
+          <img src="img/store_damnbara.jpg" alt="Dambara store" loading="lazy" />
+        </div>
+        <a href="tel:0822620004" class="call-button" style="margin-top:1.25em;">
+          <i class="fas fa-phone"></i> 082-262-0004
+        </a>
+      </div>
+      <div class="location-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3292.659561917363!2d132.47503207593672!3d34.384577973033664!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x355aa1fa2b9f9dbb%3A0xc8619b142b83a390!2sNamaste%20Indian%20Restaurant!5e0!3m2!1sen!2snp!4v1754825506403!5m2!1sen!2snp"
+          title="Dambara store map"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+
+    <!-- Store 2: Hatchobori -->
+    <div class="location-card reveal">
+      <div class="location-info">
+        <span class="location-badge">Store 2</span>
+        <h3>Hatchobori</h3>
+        <address>3F Hatchobori Arrow Building, 11-13 Hatchobori, Naka Ward, Hiroshima City</address>
+        <div class="location-hours">
+          <strong>Business Hours</strong>
+          Lunch: 11:00–15:00 (L.O. 14:00)<br />
+          Dinner: 17:00–22:00 (L.O. 21:00)<br />
+          Closed: None
+        </div>
+        <div class="location-store-imgs">
+          <img src="img/New_location.jpg" alt="Hatchobori store" loading="lazy" />
+        </div>
+        <a href="tel:0822223240" class="call-button" style="margin-top:1.25em;">
+          <i class="fas fa-phone"></i> 082-222-3240
+        </a>
+      </div>
+      <div class="location-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3292.2530162422245!2d132.45977777593728!3d34.39491437302979!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x355aa1fa2b753d3b%3A0x86414e2672b36241!2sNamaste!5e0!3m2!1sen!2snp!4v1754825473703!5m2!1sen!2snp"
+          title="Hatchobori store map"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+
+    <!-- Store 3: Otemachi -->
+    <div class="location-card reveal">
+      <div class="location-info">
+        <span class="location-badge" style="background:var(--gold);color:#000;border-color:var(--gold);">Store 3 — New</span>
+        <h3>Otemachi</h3>
+        <address>Otemachi Heiwa Building 102, 4-1-1 Otemachi, Naka Ward, Hiroshima, 〒730-0051</address>
+        <div class="location-hours">
+          <strong>Business Hours</strong>
+          Lunch: 11:00–15:00 (L.O. 14:00)<br />
+          Dinner: 17:00–22:00 (L.O. 21:00)<br />
+          Near Hiroshima Peace Memorial Park · Closed: None
+        </div>
+        <div class="location-store-imgs">
+          <img src="img/NEW_store_1.jpeg" alt="Otemachi store" loading="lazy" />
+        </div>
+        <a href="tel:0822363339" class="call-button" style="margin-top:1.25em;">
+          <i class="fas fa-phone"></i> 082-236-3339
+        </a>
+      </div>
+      <div class="location-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3292.602863125529!2d132.45392719999998!3d34.3860197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x355aa3bfef8ae449%3A0x4b156fe8a578f52!2sIndian%20Restaurant%20Namaste!5e0!3m2!1sen!2snp!4v1754825422351!5m2!1sen!2snp"
+          title="Otemachi store map"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SITE FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <!-- Brand -->
+    <div class="footer-brand">
+      <img src="img/logo.png" alt="Namaste Logo" />
+      <p>Authentic Indian &amp; Nepalese cuisine served with Ayurvedic wisdom since 1998.</p>
+      <p>Halal and vegetarian options available upon request.</p>
+      <div class="social-links">
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="TripAdvisor"><i class="fab fa-tripadvisor"></i></a>
+      </div>
+    </div>
+
+    <!-- Branches -->
+    <div class="footer-col">
+      <h4>Our Branches</h4>
+      <div class="footer-branch">
+        <h5><i class="fas fa-map-marker-alt"></i> Dambara</h5>
+        <p><i class="fas fa-phone"></i> 082-262-0004</p>
+        <p><i class="fas fa-envelope"></i> namastedambara@gmail.com</p>
+      </div>
+      <div class="footer-branch">
+        <h5><i class="fas fa-map-marker-alt"></i> Hatchobori</h5>
+        <p><i class="fas fa-phone"></i> 082-222-3240</p>
+        <p><i class="fas fa-envelope"></i> namaste.hatchobori.ten@gmail.com</p>
+      </div>
+      <div class="footer-branch">
+        <h5><i class="fas fa-map-marker-alt"></i> Otemachi <span style="color:var(--gold);font-size:0.7rem;">NEW</span></h5>
+        <p><i class="fas fa-phone"></i> 082-241-7633</p>
+        <p><i class="fas fa-envelope"></i> namasteotemachi@gmail.com</p>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="#home"><i class="fas fa-chevron-right"></i> Home</a>
+        <a href="#menu"><i class="fas fa-chevron-right"></i> Menu</a>
+        <a href="#order"><i class="fas fa-chevron-right"></i> Order Online</a>
+        <a href="#locations"><i class="fas fa-chevron-right"></i> Locations</a>
+        <a href="#about_us"><i class="fas fa-chevron-right"></i> About Us</a>
+        <a href="index.html"><i class="fas fa-chevron-right"></i> 日本語</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>
+      &copy; 1998–<script>document.write(new Date().getFullYear())</script>
+      Namaste Indian Restaurant, Hiroshima. All rights reserved.
+    </p>
+  </div>
+</footer>
+
+<!-- Back to Top -->
+<button id="page-top" aria-label="Back to top" title="Back to top">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+</body>
+</html>
