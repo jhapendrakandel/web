@@ -381,6 +381,72 @@
   </div>
 </section>
 
+<!-- ============================================================
+     COSTUMER REVIEW
+     ============================================================ -->
+<!-- REVIEWS -->
+<section class="reviews-section reveal">
+  <div class="container">
+    <h2 class="section-title">お客様の声</h2>
+    <span class="gold-line"></span>
+<p class="section-subtitle">実際にお越しいただいたお客様のレビュー</p>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">The butter chicken was absolutely divine. Best Indian food in Hiroshima — we visit every
+        week. Staff are so warm and welcoming!</p>
+      <div class="review-author">
+        <div class="review-avatar">S</div>
+        <div>
+          <div class="review-name">Sarah M.</div>
+          <div class="review-source">Google Review</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">広島で一番のインド料理！ナンが絶品で、カレーのスパイスが本格的。また必ず来ます。</p>
+      <div class="review-author">
+        <div class="review-avatar">田</div>
+        <div>
+          <div class="review-name">田中 健一</div>
+          <div class="review-source">Google レビュー</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Incredible Ayurvedic cuisine. The all-you-can-eat course is amazing value. Highly recommend
+        for large groups and parties!</p>
+      <div class="review-author">
+        <div class="review-avatar">J</div>
+        <div>
+          <div class="review-name">James K.</div>
+          <div class="review-source">TripAdvisor</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★☆</div>
+      <p class="review-text">Momo dumplings are a must-try. Vegetarian options are excellent and staff always
+        accommodate special requests with a smile.</p>
+      <div class="review-author">
+        <div class="review-avatar">A</div>
+        <div>
+          <div class="review-name">Aiko T.</div>
+          <div class="review-source">Tabelog</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="reviews-cta">
+  <a href="https://www.google.com/maps/search/Namaste+Indian+Restaurant+Hiroshima" target="_blank">
+    <i class="fab fa-google"></i> Googleでレビューを書く
+  </a>
+  </div>
+</section>
+
 <hr class="section-divider" />
 
 <!-- ============================================================
@@ -552,29 +618,20 @@
 </button>
 
 <script>
-(function(){
-  var jst  = new Date(Date.now() + 9*3600000);
-  var mins = jst.getUTCHours()*60 + jst.getUTCMinutes();
-  var isJP = document.documentElement.lang==='ja';
-  var open = (mins>=660&&mins<870)||(mins>=1020&&mins<1290);
-  // 660=11:00 870=14:30 1020=17:00 1290=21:30
-  var isBreak = mins>=900&&mins<1020;
-  var dot   = document.getElementById('navDot');
-  var lbl   = document.getElementById('navLabel');
-  if(!dot||!lbl)return;
-  if(open){
-    dot.style.background='#22c55e';
-    dot.style.boxShadow='0 0 0 3px rgba(34,197,94,.25)';
-    lbl.textContent = isJP?'営業中':'Open';
-    lbl.style.color='#86efac';
-  } else if(isBreak){
-    dot.style.background='#f59e0b';
-    lbl.textContent = isJP?'休憩中':'Break';
-    lbl.style.color='#fcd34d';
-  } else {
-    lbl.textContent = isJP?'閉店':'Closed';
-  }
-})();
+    (function () {
+      var jst = new Date(Date.now() + 9 * 3600000);
+      var mins = jst.getUTCHours() * 60 + jst.getUTCMinutes();
+      var dot = document.getElementById('navDot');
+      var lbl = document.getElementById('navLabel');
+      if (!dot || !lbl) return;
+      var open = (mins >= 660 && mins < 870) || (mins >= 1020 && mins < 1290);
+      var brk = mins >= 900 && mins < 1020;
+      var lo = (mins >= 870 && mins < 900) || (mins >= 1290 && mins < 1320);
+      if (open) { dot.style.cssText = 'width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.25);display:inline-block;flex-shrink:0'; lbl.textContent = '営業中'; lbl.style.color = '#86efac'; }
+      else if (lo) { dot.style.cssText = 'width:7px;height:7px;border-radius:50%;background:#f59e0b;display:inline-block;flex-shrink:0'; lbl.textContent = 'ラストオーダー'; lbl.style.color = '#fcd34d'; }
+      else if (brk) { dot.style.cssText = 'width:7px;height:7px;border-radius:50%;background:#f59e0b;display:inline-block;flex-shrink:0'; lbl.textContent = '休憩中'; lbl.style.color = '#fcd34d'; }
+      else { dot.style.cssText = 'width:7px;height:7px;border-radius:50%;background:#dc2626;display:inline-block;flex-shrink:0'; lbl.textContent = '閉店'; lbl.style.color = '#fca5a5'; }
+    })();
 </script>
 
 </body>

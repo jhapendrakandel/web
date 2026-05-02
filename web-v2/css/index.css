@@ -1343,6 +1343,9 @@ nav { display: flex; align-items: center; gap: 8px; }
 
 /* ── MOBILE UX IMPROVEMENTS ── */
 @media (max-width: 768px) {
+  /* Hide logo txt */
+  .logo-text {display: none;}
+
   /* Larger tap targets */
   .menu-categories button{ padding:12px 18px; font-size:.85rem; min-height:44px }
   .call-button{ min-height:48px; font-size:.92rem }
@@ -1512,3 +1515,121 @@ nav { display: flex; align-items: center; gap: 8px; }
 .order-branch-btn:hover{border-color:var(--crimson);background:var(--cream)}
 .order-branch-btn span{font-size:.75rem;color:var(--text-mid);font-weight:400}
 .order-branch-btn i{color:var(--crimson);font-size:.85rem}
+
+/*Costumer - Review part*/
+/* ── REVIEWS ── */
+.reviews-section {
+  padding: 80px 0;
+  background: var(--white)
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px
+}
+
+.review-card {
+  background: var(--cream);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, .06)
+}
+
+.review-stars {
+  color: var(--gold);
+  font-size: .9rem;
+  letter-spacing: 2px;
+  margin-bottom: 10px
+}
+
+.review-text {
+  font-size: .88rem;
+  color: var(--text-mid);
+  line-height: 1.75;
+  margin-bottom: 14px;
+  font-style: italic
+}
+
+.review-text::before {
+  content: '"';
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: var(--gold);
+  opacity: .3;
+  position: absolute;
+  top: 14px;
+  left: 18px;
+  line-height: 1
+}
+
+.review-author {
+  display: flex;
+  align-items: center;
+  gap: 10px
+}
+
+.review-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--crimson);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: .85rem;
+  flex-shrink: 0
+}
+
+.review-name {
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--charcoal)
+}
+
+.review-source {
+  font-size: .68rem;
+  color: var(--text-light);
+  margin-top: 1px
+}
+
+.reviews-cta {
+  text-align: center;
+  margin-top: 2em
+}
+
+.reviews-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 24px;
+  border: 1.5px solid var(--crimson);
+  border-radius: 30px;
+  color: var(--crimson);
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-decoration: none;
+  transition: .2s
+}
+
+.reviews-cta a:hover {
+  background: var(--crimson);
+  color: #fff
+}
+
+@media(max-width:600px) {
+  .reviews-grid {
+    grid-template-columns: 1fr;
+    padding: 0 12px
+  }
+}
+
+/*End of Review part */
+
