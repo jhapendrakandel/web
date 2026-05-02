@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Static Repo Explorer</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #0f172a;
+        color: #e2e8f0;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h2 {
+        margin-bottom: 10px;
+    }
+
+    #path {
+        margin-bottom: 15px;
+        color: #94a3b8;
+        font-size: 14px;
+    }
+
+    ul {
+        list-style: none;
+        padding-left: 10px;
+    }
+
+    li {
+        padding: 6px 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    li:hover {
+        background: #1e293b;
+    }
+
+    .folder::before {
+        content: "📁 ";
+    }
+
+    .file::before {
+        content: "📄 ";
+    }
+
+    .back {
+        color: #38bdf8;
+    }
+</style>
+</head>
+
+<body>
+
+<h2>📂 Repo Explorer</h2>
+<div id="path">/</div>
+<ul id="fileList"></ul>
+
+<script>
+// ==== EDIT THIS STRUCTURE ====
+const repoStructure = {
+    "index.html": null,
+    "style.css": null,
+    "script.js": null,
+    "img": {
+        "logo.png": null,
+        "banner.jpg": null
+    },
+    "pages": {
+        "about.html": null,
+        "contact.html": null
+    }
+};
+
+// ============================
+
+let currentPath = [];
+let currentDir = repoStructure;
+
+function render() {
+    const list = document.getElementById("fileList");
+    const pathDiv = document.getElementById("path");
+
+    list.innerHTML = "";
+    pathDiv.textContent = "/" + currentPath.join("/");
+
+    // Back button
+    if (currentPath.length > 0) {
+        const back = document.createElement("li");
+        back.textContent = ".. (go back)";
+        back.classList.add("back");
+        back.onclick = () => {
+            currentPath.pop();
+            navigate();
+        };
+        list.appendChild(back);
+    }
+
+    for (let key in currentDir) {
+        const li = document.createElement("li");
+
+        if (currentDir[key] === null) {
+            li.textContent = key;
+            li.classList.add("file");
+
+            li.onclick = () => {
+                const newPath = "/" + [...currentPath, key].join("/");
+                window.history.pushState({}, "", newPath);
+                alert("File path: " + newPath);
+            };
+
+        } else {
+            li.textContent = key;
+            li.classList.add("folder");
+
+            li.onclick = () => {
+                currentPath.push(key);
+                navigate();
+            };
+        }
+
+        list.appendChild(li);
+    }
+}
+
+function navigate() {
+    currentDir = repoStructure;
+
+    for (let p of currentPath) {
+        currentDir = currentDir[p];
+    }
+
+    render();
+}
+
+// Initial load
+render();
+</script>
+
+</body>
+</html>
