@@ -56,6 +56,8 @@
     background:#6b7280;display:inline-block;flex-shrink:0;"></span>
   <span id="navLabel">–</span>
 
+  <div id="jpTime"></div>
+
 </div>
     </nav>
   </div>
@@ -404,67 +406,63 @@
      ============================================================ -->
 
 <!-- REVIEWS -->
-<section class="reviews-section reveal">
+
+<!-- REVIEWS -->
+<section class="reviews-section">
   <div class="container">
-    <h2 class="section-title">What Our Guests Say</h2>
+    <h2 class="section-title reveal">What Our Guests Say</h2>
     <span class="gold-line"></span>
-    <p class="section-subtitle">Real reviews from our customers</p>
+    <p class="section-subtitle reveal">Real Google reviews from all 3 branches</p>
   </div>
-  <div class="reviews-grid">
-    <div class="review-card reveal">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">The butter chicken was absolutely divine. Best Indian food in Hiroshima — we visit every
-        week. Staff are so warm and welcoming!</p>
-      <div class="review-author">
-        <div class="review-avatar">S</div>
-        <div>
-          <div class="review-name">Sarah M.</div>
-          <div class="review-source">Google Review</div>
-        </div>
-      </div>
-    </div>
-    <div class="review-card reveal">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">広島で一番のインド料理！ナンが絶品で、カレーのスパイスが本格的。また必ず来ます。</p>
-      <div class="review-author">
-        <div class="review-avatar">田</div>
-        <div>
-          <div class="review-name">田中 健一</div>
-          <div class="review-source">Google レビュー</div>
-        </div>
-      </div>
-    </div>
-    <div class="review-card reveal">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">Incredible Ayurvedic cuisine. The all-you-can-eat course is amazing value. Highly recommend
-        for large groups and parties!</p>
-      <div class="review-author">
-        <div class="review-avatar">J</div>
-        <div>
-          <div class="review-name">James K.</div>
-          <div class="review-source">TripAdvisor</div>
-        </div>
-      </div>
-    </div>
-    <div class="review-card reveal">
-      <div class="review-stars">★★★★☆</div>
-      <p class="review-text">Momo dumplings are a must-try. Vegetarian options are excellent and staff always
-        accommodate special requests with a smile.</p>
-      <div class="review-author">
-        <div class="review-avatar">A</div>
-        <div>
-          <div class="review-name">Aiko T.</div>
-          <div class="review-source">Tabelog</div>
-        </div>
-      </div>
-    </div>
+  <div class="reviews-scene">
+    <div class="reviews-carousel" id="reviewsCarousel"></div>
   </div>
-  <div class="reviews-cta">
-    <a href="https://www.google.com/maps/search/Namaste+Indian+Restaurant+Hiroshima" target="_blank">
-      <i class="fab fa-google"></i> Leave a Review on Google
-    </a>
+  <div class="reviews-dots" id="reviewsDots"></div>
+  <div class="reviews-nav">
+    <button onclick="rMove(-1)" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+    <button onclick="openGmap()"
+      style="padding:0 18px;width:auto;border-radius:20px;font-size:.75rem;font-weight:700;letter-spacing:.06em;gap:6px;"
+      aria-label="Leave review">
+      <i class="fab fa-google" style="color:#4285F4"></i> Review Us
+    </button>
+    <button onclick="rMove(1)" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
   </div>
 </section>
+
+<!-- Google Review Popup -->
+<div class="gmap-overlay" id="gmapOverlay" onclick="if(event.target===this)closeGmap()">
+  <div class="gmap-sheet">
+    <div class="gmap-drag"></div>
+    <h3 class="gmap-title">Leave a Google Review</h3>
+    <p class="gmap-sub">Choose your branch — opens Google Maps</p>
+    <div class="gmap-links">
+      <a class="gmap-link" href="https://g.page/r/REPLACE_DAMBARA_CID/review" target="_blank">
+        <i class="fab fa-google"></i>
+        <div class="gmap-link-info">
+          <h4>Dambara</h4><span>8-11 Dambara Minami 2-chome</span>
+        </div>
+        <span class="ext"><i class="fas fa-arrow-right"></i></span>
+      </a>
+      <a class="gmap-link" href="https://g.page/r/REPLACE_HATCHOBORI_CID/review" target="_blank">
+        <i class="fab fa-google"></i>
+        <div class="gmap-link-info">
+          <h4>Hatchobori</h4><span>3F Arrow Building, Hatchobori</span>
+        </div>
+        <span class="ext"><i class="fas fa-arrow-right"></i></span>
+      </a>
+      <a class="gmap-link" href="https://g.page/r/REPLACE_OTEMACHI_CID/review" target="_blank">
+        <i class="fab fa-google"></i>
+        <div class="gmap-link-info">
+          <h4>Otemachi <span
+              style="background:var(--gold);color:#000;font-size:.55rem;padding:1px 6px;border-radius:8px;margin-left:4px;">NEW</span>
+          </h4><span>4-1-1 Otemachi, Naka Ward</span>
+        </div>
+        <span class="ext"><i class="fas fa-arrow-right"></i></span>
+      </a>
+    </div>
+    <button class="gmap-cancel" onclick="closeGmap()">Cancel</button>
+  </div>
+</div>
 
 <hr class="section-divider" />
 
@@ -643,14 +641,29 @@
       var dot = document.getElementById('navDot');
       var lbl = document.getElementById('navLabel');
       if (!dot || !lbl) return;
-      var open = (mins >= 660 && mins < 870) || (mins >= 1020 && mins < 1290);
-      var brk = mins >= 900 && mins < 1020;
+      var open = (mins >= 660 && mins < 870) || (mins >= 1080 && mins < 1290);
+      var brk = mins >= 900 && mins < 1080;
       var lo = (mins >= 870 && mins < 900) || (mins >= 1290 && mins < 1320);
       if (open) { dot.style.cssText = 'width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.25);display:inline-block;flex-shrink:0'; lbl.textContent = 'Open'; lbl.style.color = '#86efac'; }
       else if (lo) { dot.style.cssText = 'width:7px;height:7px;border-radius:50%;background:#f59e0b;display:inline-block;flex-shrink:0'; lbl.textContent = 'Last Order'; lbl.style.color = '#fcd34d'; }
       else if (brk) { dot.style.cssText = 'width:7px;height:7px;border-radius:50%;background:#f59e0b;display:inline-block;flex-shrink:0'; lbl.textContent = 'Break'; lbl.style.color = '#fcd34d'; }
       else { dot.style.cssText = 'width:7px;height:7px;border-radius:50%;background:#dc2626;display:inline-block;flex-shrink:0'; lbl.textContent = 'Closed'; lbl.style.color = '#fca5a5'; }
     })();
+
+    // JPN Time
+    function getJapanTime() {
+        return new Date().toLocaleTimeString('en-US', {
+          timeZone: 'Asia/Tokyo',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false
+        });
+      }
+
+      setInterval(() => {
+        document.getElementById('jpTime').textContent = getJapanTime();
+      }, 1000);
 </script>
 
 </body>

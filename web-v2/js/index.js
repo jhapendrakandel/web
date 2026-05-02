@@ -571,14 +571,14 @@ window.findNearest = function() {
   var jst  = new Date(Date.now() + 9*3600000);
   var mins = jst.getUTCHours()*60 + jst.getUTCMinutes();
 
-  var L_OPEN=660, L_LO=870, L_CLOSE=900;   // 11:00 14:30 15:00
-  var D_OPEN=1020, D_LO=1290, D_CLOSE=1320; // 17:00 21:30 22:00
+  var L_OPEN=600, L_LO=870, L_CLOSE=900;   // 10:00 14:30 15:00
+  var D_OPEN=1080, D_LO=1290, D_CLOSE=1320; // 18:00 21:30 22:00
 
   var label, bg, pulse;
-  if      (mins < L_OPEN)               { label='◌ Closed · Opens 11:00';  bg='#dc2626'; pulse=false; }
+  if      (mins < L_OPEN)               { label='◌ Closed · Opens 10:00';  bg='#dc2626'; pulse=false; }
   else if (mins < L_LO)                 { label='● Lunch Open';             bg='#16a34a'; pulse=true;  }
   else if (mins < L_CLOSE)              { label='⚡ Last Order 14:30';      bg='#d97706'; pulse=true;  }
-  else if (mins < D_OPEN)               { label='◌ Break 15:00 – 17:00';   bg='#6b7280'; pulse=false; }
+  else if (mins < D_OPEN)               { label='◌ Break 15:00 – 17:59';   bg='#6b7280'; pulse=false; }
   else if (mins < D_LO)                 { label='● Dinner Open';            bg='#16a34a'; pulse=true;  }
   else if (mins < D_CLOSE)              { label='⚡ Last Order 21:30';      bg='#d97706'; pulse=true;  }
   else                                  { label='◌ Closed · Opens 10:00';  bg='#dc2626'; pulse=false; }
@@ -597,4 +597,190 @@ window.findNearest = function() {
     document.head.appendChild(s);
   }
   document.body.appendChild(badge);
+})();
+
+/* ── Review Carousel ── */
+(function(){
+  var REVIEWS=[
+    {branch:'Danbara',name:'Simon K',rating:5,review:'We had a fantastic dinner at Namaste. The staff was extremely friendly and the food was super tasty at very fair prices. The interior of the restaurant is nice and toilet is clean. I can\'t ask for more.'},
+    {branch:'Danbara',name:'Jace',rating:5,review:'Even without meat, the flavors are explosive. The Vegetable Biryani was fragrant and full of fresh veggies. Incredible vegetarian options.'},
+    {branch:'Danbara',name:'Lio Sakai',rating:5,review:'Their Chicken Biryani is my ultimate comfort food. Fragrant rice and tender chicken. Always hits the spot.'},
+    {branch:'Danbara',name:'Wenjie Wang',rating:4.5,review:'Surprised by the big naan. Chose spicy level and it was more delicious than expected.'},
+    {branch:'Danbara',name:'T Crunchy',rating:5,review:'Delicious food, great service, and friendly staff. Lassi was perfect too.'},
+    {branch:'Danbara',name:'Damien Cordova',rating:5,review:'Hands down the best Indian in Hiroshima. Consistently high quality, friendly, and fast service.'},
+    {branch:'Danbara',name:'Dwi Robbiardy Eksa',rating:5,review:'The mutton biryani was very tasty and the staff was very friendly. They can speak multiple languages.'},
+    {branch:'Danbara',name:'Hemant Kumar',rating:5,review:'Chicken Tikka Masala and Garlic Naan combination is awesome. Great service.'},
+    {branch:'Danbara',name:'Cole Sullivan',rating:5,review:'I have eaten at most Indian and Nepali restaurants in Hiroshima, and this is the best one.'},
+    {branch:'Danbara',name:'Amrita Iyen',rating:4.5,review:'The vegetarian biryani is great with a good portion size. Great option for vegetarians.'},
+    {branch:'Danbara',name:'Joseph Scott',rating:5,review:'Best Indian curry I\'ve had in all of Japan.'},
+    {branch:'Hatchobori',name:'Gyanjit Mahapatra',rating:5,review:'Hands down the best Indian food I\'ve had in Japan. Great service and amazing food.'},
+    {branch:'Hatchobori',name:'Sagi Yulevich',rating:5,review:'Amazing food, very tasty and vegan friendly. Service is polite and authentic.'},
+    {branch:'Hatchobori',name:'Cecilia Abrera',rating:5,review:'Butter curry was fantastic. Garlic naan was great. Excellent customer service and well priced.'},
+    {branch:'Hatchobori',name:'Christal Thomas',rating:5,review:'The food was amazing. Best Indian food during our Japan trip. Very kind owner.'},
+    {branch:'Hatchobori',name:'Vasuki Malugodu',rating:5,review:'Vegetarian food options are very good and tasty. Loved the place.'},
+    {branch:'Hatchobori',name:'Mikyla Acosta',rating:5,review:'Great Indian food with many vegetarian options. Kind service and clean space.'},
+    {branch:'Hatchobori',name:'Lior Tansky',rating:5,review:'Absolutely amazing. Rich flavors, fast service, and very friendly staff.'},
+    {branch:'Hatchobori',name:'Ed Pitts',rating:5,review:'One of the most incredible meals I\'ve had. Butter chicken and garlic naan were perfect.'},
+    {branch:'Hatchobori',name:'Shawn',rating:5,review:'Fantastic experience. Chicken tandoori and naan were perfectly cooked. Highly recommend.'},
+    {branch:'Hatchobori',name:'Christi Jordan',rating:5,review:'Amazing service for large groups. Delicious food and highly recommend.'},
+    {branch:'Hatchobori',name:'Da Fran',rating:5,review:'Delicious meal with great value. Cheese naan was the highlight.'},
+    {branch:'Hatchobori',name:'Phillipa Angel',rating:5,review:'Absolutely delightful dinner. Naan and curries were amazing. Best service experience.'},
+    {branch:'Otemachi',name:'Ian Robertshaw',rating:5,review:'Fantastic meal with high quality flavors. Service was attentive and excellent.'},
+    {branch:'Otemachi',name:'Tereza Šolcová',rating:5,review:'Kind service and comforting food after a long day. Mango lassi was excellent.'},
+    {branch:'Otemachi',name:'Bishal Khadka',rating:5,review:'Great place for the best Indian and Nepali food. Highly recommended.'},
+    {branch:'Otemachi',name:'Gautam',rating:5,review:'Amazing food with real Indian taste. Hidden gem in Hiroshima.'},
+    {branch:'Otemachi',name:'Conor Grealy',rating:5,review:'Hidden gem with huge naan and beautifully spiced curry. Great service.'},
+    {branch:'Otemachi',name:'Melita Geaghan',rating:5,review:'Great tasting Indian food. Highly recommend this place.'},
+    {branch:'Otemachi',name:'Sophie Stimson',rating:5,review:'Delicious meals, great pricing, and very kind staff.'},
+    {branch:'Otemachi',name:'Raffaella Ravinetto',rating:5,review:'Excellent food, great value, and very friendly service.'},
+    {branch:'Otemachi',name:'Vijaya Prakash Kandel',rating:5,review:'Authentic Indian flavors with excellent service. One of the best in Hiroshima.'},
+    {branch:'Otemachi',name:'Emil Jønsrud',rating:5,review:'Exceptional service and wonderful food. Very welcoming atmosphere.'},
+    {branch:'Otemachi',name:'Laia Gomez Meldahl',rating:5,review:'Lovely restaurant with kind staff and flavorful food for everyone.'},
+    {branch:'Otemachi',name:'Dylan Cline',rating:4.5,review:'Great food, especially the chicken curry.'},
+    {branch:'Otemachi',name:'Michal Prehoda',rating:5,review:'Amazing food and mango lassi with very friendly staff.'},
+    {branch:'Otemachi',name:'Eugenie Kortenhorst',rating:5,review:'Fantastic Indian curry that tastes like India.'},
+    {branch:'Otemachi',name:'George Christian De Leon',rating:5,review:'Delicious food and definitely worth the money.'},
+    {branch:'Otemachi',name:'Babu Gautam',rating:5,review:'Best Indian food in Hiroshima.'},
+    {branch:'Otemachi',name:'Chaitee Biswas',rating:5,review:'Best biryani in Japan.'},
+    {branch:'Otemachi',name:'Kanaad Bhardwaj',rating:5,review:'Biryani is a must-try.'}
+  ];
+
+  var TRUNCATE = 100; // chars before "See more"
+  var branchColors = {Danbara:'#8B1A1A', Hatchobori:'#1A4A8B', Otemachi:'#1A6B3A'};
+  var current = 0;
+  var autoTimer;
+
+  var track = document.getElementById('reviewsCarousel');
+  var dotsWrap = document.getElementById('reviewsDots');
+  if(!track) return;
+
+  // Shuffle slightly — interleave branches
+  var shuffled = [];
+  ['Danbara','Hatchobori','Otemachi'].forEach(function(b,bi){
+    REVIEWS.filter(function(r){ return r.branch===b; }).forEach(function(r,i){
+      shuffled[bi + i*3] = r;
+    });
+  });
+  shuffled = shuffled.filter(Boolean);
+
+  // Build cards
+  shuffled.forEach(function(r, i){
+    var stars = '';
+    var full = Math.floor(r.rating);
+    var half = r.rating % 1 >= 0.5;
+    for(var s=0;s<full;s++) stars+='★';
+    if(half) stars+='½';
+
+    var short = r.review.length > TRUNCATE
+      ? r.review.slice(0, TRUNCATE).trimEnd() + '…'
+      : r.review;
+    var hasMore = r.review.length > TRUNCATE;
+    var initials = r.name.split(' ').map(function(w){ return w[0]; }).join('').slice(0,2).toUpperCase();
+    var bg = branchColors[r.branch] || '#8B1A1A';
+
+    var card = document.createElement('div');
+    card.className = 'review-card';
+    card.dataset.index = i;
+    card.innerHTML =
+      '<span class="review-branch-tag" style="background:'+bg+'">'+r.branch+'</span>'+
+      '<div class="review-stars">'+stars+'</div>'+
+      '<div class="review-quote">'+
+        '<span class="review-short">'+short+'</span>'+
+        (hasMore
+          ? '<span class="review-full">'+r.review+'</span>'+
+            '<button class="review-seemore" onclick="rToggle(this,event)">See more ▾</button>'
+          : '')+
+      '</div>'+
+      '<div class="review-author">'+
+        '<div class="review-avatar" style="background:'+bg+'">'+initials+'</div>'+
+        '<div>'+
+          '<div class="review-meta-name">'+r.name+'</div>'+
+          '<div class="review-meta-src"><i class="fab fa-google" style="color:#4285F4;font-size:.65rem;margin-right:3px;"></i>Google Review</div>'+
+        '</div>'+
+      '</div>';
+    track.appendChild(card);
+
+    // Dot every 5
+    if(i % 5 === 0){
+      var dot = document.createElement('button');
+      dot.className = 'rdot' + (i===0?' active':'');
+      dot.setAttribute('aria-label','Go to slide '+(Math.floor(i/5)+1));
+      dot.onclick = function(){ goTo(i); };
+      dotsWrap.appendChild(dot);
+    }
+  });
+
+  function updateCards(){
+    var cards = track.querySelectorAll('.review-card');
+    cards.forEach(function(c, i){
+      c.classList.remove('active','active-adj');
+      var diff = Math.abs(i - current);
+      if(i===current) c.classList.add('active');
+      else if(diff===1) c.classList.add('active-adj');
+    });
+    // Scroll track
+    var card = cards[current];
+    if(!card) return;
+    var sceneW = track.parentElement.offsetWidth;
+    var cardW  = card.offsetWidth + 20;
+    var offset = card.offsetLeft - (sceneW/2) + (cardW/2);
+    track.style.transform = 'translateX(-'+Math.max(0,offset)+'px)';
+    // Dots
+    var dots = dotsWrap.querySelectorAll('.rdot');
+    dots.forEach(function(d,di){ d.classList.toggle('active', di===Math.floor(current/5)); });
+  }
+
+  function goTo(i){
+    current = Math.max(0, Math.min(i, shuffled.length-1));
+    updateCards();
+    resetAuto();
+  }
+
+  window.rMove = function(dir){
+    goTo((current + dir + shuffled.length) % shuffled.length);
+  };
+
+  window.rToggle = function(btn, e){
+    e.stopPropagation();
+    var card  = btn.closest('.review-card');
+    var sh    = card.querySelector('.review-short');
+    var fl    = card.querySelector('.review-full');
+    var open  = fl.style.display === 'block';
+    sh.style.display = open ? 'block' : 'none';
+    fl.style.display = open ? 'none'  : 'block';
+    btn.textContent  = open ? 'See more ▾' : 'See less ▴';
+  };
+
+  function resetAuto(){
+    clearInterval(autoTimer);
+    autoTimer = setInterval(function(){ rMove(1); }, 1200); // change value to get high or slow spped
+  }
+
+  // Touch swipe
+  var tx = 0;
+  track.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', function(e){
+    var dx = e.changedTouches[0].clientX - tx;
+    if(Math.abs(dx)>40) rMove(dx<0?1:-1);
+  }, {passive:true});
+
+  // Pause on hover
+  track.addEventListener('mouseenter', function(){ clearInterval(autoTimer); });
+  track.addEventListener('mouseleave', resetAuto);
+
+  // Google popup
+  window.openGmap = function(){
+    document.getElementById('gmapOverlay').classList.add('open');
+    document.body.style.overflow='hidden';
+  };
+  window.closeGmap = function(){
+    document.getElementById('gmapOverlay').classList.remove('open');
+    document.body.style.overflow='';
+  };
+  document.getElementById('gmapOverlay').addEventListener('click', function(e){
+    if(e.target===this) closeGmap();
+  });
+
+  updateCards();
+  resetAuto();
 })();
