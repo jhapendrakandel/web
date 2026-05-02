@@ -2,193 +2,589 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
 <title>Namaste Menu</title>
 <link rel="icon" href="img/logo.png"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Lato:wght@300;400;700&display=swap');
-:root{--red:#8B1A1A;--gold:#C9A84C;--cream:#FDF6EC;--text:#2C2C2C;--mid:#5A5A5A}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--text);min-height:100vh}
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@300;400;700&display=swap');
 
-/* Top bar */
-.qr-header{background:var(--red);padding:14px 16px;text-align:center;position:sticky;top:0;z-index:100}
-.qr-header img{height:36px;width:auto;filter:brightness(2)}
-.qr-header p{color:rgba(255,255,255,.7);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;margin-top:4px}
+:root{
+  --red:#8B1A1A; --red-dark:#6B1313; --gold:#C9A84C; --gold-lt:#E8C97A;
+  --cream:#FDF6EC; --cream-d:#F0E4CC; --white:#fff;
+  --text:#1C1C1C; --mid:#6B6B6B; --light:#A0A0A0;
+  --radius:14px; --radius-sm:8px;
+  --shadow:0 4px 20px rgba(0,0,0,.1);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--text);
+  min-height:100vh;padding-bottom:env(safe-area-inset-bottom,20px)}
 
-/* Lang toggle */
-.lang-bar{background:#111;display:flex;justify-content:center;padding:8px;gap:8px}
-.lang-bar a{color:rgba(255,255,255,.5);font-size:.72rem;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;padding:5px 14px;border:1px solid rgba(255,255,255,.15);
-  border-radius:20px;text-decoration:none;transition:.2s}
-.lang-bar a.active{color:var(--gold);border-color:var(--gold)}
+/* ── HEADER ── */
+.qr-header{
+  background:var(--red);
+  padding:12px 16px 10px;
+  position:sticky;top:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  box-shadow:0 2px 16px rgba(139,26,26,.35);
+}
+.qr-header-brand{display:flex;align-items:center;gap:10px}
+.qr-header img{height:34px;width:auto;filter:brightness(2)}
+.qr-header-title{color:#fff;line-height:1.15}
+.qr-header-title strong{display:block;font-family:'Playfair Display',serif;font-size:.95rem;letter-spacing:.02em}
+.qr-header-title span{font-size:.6rem;letter-spacing:.15em;color:rgba(255,255,255,.6);text-transform:uppercase}
+.lang-switch{display:flex;gap:6px}
+.lang-switch a{
+  font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 10px;border-radius:20px;border:1px solid rgba(255,255,255,.25);
+  color:rgba(255,255,255,.6);text-decoration:none;transition:.2s
+}
+.lang-switch a.active{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.5)}
 
-/* Hours strip */
-.hours-strip{background:#1a1a1a;color:rgba(255,255,255,.7);font-size:.72rem;
-  text-align:center;padding:7px;letter-spacing:.06em}
-.hours-strip strong{color:var(--gold)}
+/* ── HOURS STRIP ── */
+.hours-strip{
+  background:#111;display:flex;align-items:center;justify-content:center;
+  gap:16px;padding:8px 16px;flex-wrap:wrap;
+}
+.hours-block{display:flex;align-items:center;gap:6px;font-size:.68rem;color:rgba(255,255,255,.55)}
+.hours-block strong{color:var(--gold);font-weight:700}
+.hours-dot{width:6px;height:6px;border-radius:50%;background:#444}
 
-/* Categories */
-.cat-tabs{display:flex;overflow-x:auto;gap:8px;padding:14px 12px;
-  background:#fff;border-bottom:1px solid rgba(0,0,0,.06);
-  scrollbar-width:none;-webkit-overflow-scrolling:touch;position:sticky;top:64px;z-index:99}
+/* ── STATUS BAR ── */
+.status-bar{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:7px 16px;font-size:.7rem;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.status-bar .sdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.status-open{background:rgba(34,197,94,.12);color:#15803d}
+.status-open .sdot{background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.2)}
+.status-break{background:rgba(245,158,11,.1);color:#b45309}
+.status-break .sdot{background:#f59e0b}
+.status-closed{background:rgba(107,114,128,.1);color:#6b7280}
+.status-closed .sdot{background:#9ca3af}
+
+/* ── CATEGORY TABS ── */
+.cat-wrap{
+  background:#fff;
+  border-bottom:1px solid rgba(0,0,0,.07);
+  position:sticky;top:57px;z-index:150;
+  box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+.cat-tabs{
+  display:flex;overflow-x:auto;gap:6px;
+  padding:10px 12px;scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
 .cat-tabs::-webkit-scrollbar{display:none}
-.cat-tab{flex-shrink:0;padding:8px 16px;border:1.5px solid rgba(0,0,0,.1);
-  border-radius:20px;font-size:.78rem;font-weight:700;letter-spacing:.06em;
-  text-transform:uppercase;background:#fff;color:var(--mid);cursor:pointer;
-  transition:.2s;white-space:nowrap}
-.cat-tab.active{background:var(--red);border-color:var(--red);color:#fff}
+.cat-tab{
+  flex-shrink:0;display:flex;align-items:center;gap:6px;
+  padding:8px 16px;border-radius:20px;font-size:.75rem;font-weight:700;
+  letter-spacing:.04em;white-space:nowrap;cursor:pointer;
+  border:1.5px solid rgba(0,0,0,.1);background:#fff;color:var(--mid);
+  transition:all .2s ease;
+}
+.cat-tab:active{transform:scale(.96)}
+.cat-tab.active{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 4px 12px rgba(139,26,26,.25)}
+.cat-tab .tab-icon{font-size:.85rem}
 
-/* Menu items */
-.menu-list{padding:12px;display:flex;flex-direction:column;gap:12px;max-width:600px;margin:0 auto}
+/* ── MENU LIST ── */
+.menu-list{
+  padding:14px 12px;
+  display:flex;flex-direction:column;gap:10px;
+  max-width:640px;margin:0 auto;
+}
 
-.menu-qr-card{background:#fff;border-radius:12px;overflow:hidden;
-  display:grid;grid-template-columns:100px 1fr;box-shadow:0 2px 8px rgba(0,0,0,.07)}
-.menu-qr-card-img{width:100px;height:100px;object-fit:cover;display:block}
-.menu-qr-card-img.placeholder{background:var(--cream);display:flex;align-items:center;
-  justify-content:center;font-size:1.8rem}
-.menu-qr-card-body{padding:12px 12px 12px 10px;display:flex;flex-direction:column;gap:5px}
-.menu-qr-card-body h3{font-family:'Playfair Display',serif;font-size:.92rem;
-  color:var(--text);line-height:1.25}
-.menu-qr-card-body p{font-size:.72rem;color:var(--mid);line-height:1.5;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.menu-qr-price{font-size:1rem;font-weight:700;color:var(--red);margin-top:auto}
-.menu-qr-badge{display:inline-block;font-size:.6rem;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;background:var(--gold);color:#000;border-radius:10px;
-  padding:2px 7px;align-self:flex-start}
+/* Category heading inside list */
+.cat-label{
+  font-size:.65rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gold);
+  padding:4px 0 2px;border-bottom:1px solid var(--cream-d);
+  margin-bottom:2px;
+}
 
-/* Drinks card (no image) */
-.drink-qr-card{background:#fff;border-radius:10px;padding:14px;
-  display:flex;justify-content:space-between;align-items:center;gap:8px;
-  box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.drink-qr-card h4{font-size:.88rem;color:var(--text);flex:1;line-height:1.3}
-.drink-qr-card p{font-size:.72rem;color:var(--mid)}
-.drink-qr-card .dq-price{font-size:.95rem;font-weight:700;color:var(--red);white-space:nowrap}
+/* Food card */
+.qr-card{
+  background:var(--white);border-radius:var(--radius);
+  overflow:hidden;display:flex;align-items:stretch;
+  box-shadow:var(--shadow);transition:transform .18s ease;
+  cursor:pointer;
+}
+.qr-card:active{transform:scale(.98)}
+.qr-card-img{
+  width:96px;min-height:96px;flex-shrink:0;
+  object-fit:cover;display:block;background:var(--cream-d);
+}
+.qr-card-body{
+  padding:13px 14px 13px 12px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  flex:1;min-width:0;gap:5px;
+}
+.qr-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.qr-card-name{
+  font-family:'Playfair Display',serif;
+  font-size:.9rem;color:var(--text);line-height:1.25;flex:1;
+}
+.qr-card-badge{
+  flex-shrink:0;font-size:.55rem;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;padding:3px 7px;border-radius:10px;
+  background:var(--gold);color:#000;
+}
+.qr-card-desc{
+  font-size:.72rem;color:var(--mid);line-height:1.5;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.qr-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:2px}
+.qr-card-price{font-size:1rem;font-weight:700;color:var(--red)}
+.qr-card-more{font-size:.65rem;color:var(--light);display:flex;align-items:center;gap:3px}
+.qr-card-more i{font-size:.6rem}
 
-/* Drink sub-filter */
-.drink-subfilter{display:flex;overflow-x:auto;gap:6px;padding:0 12px 10px;
-  scrollbar-width:none;-webkit-overflow-scrolling:touch}
+/* Drink card */
+.qr-drink{
+  background:var(--white);border-radius:var(--radius-sm);
+  padding:13px 14px;display:flex;align-items:center;gap:12px;
+  box-shadow:0 2px 10px rgba(0,0,0,.06);
+}
+.qr-drink-info{flex:1;min-width:0}
+.qr-drink-name{font-size:.88rem;font-weight:700;color:var(--text);line-height:1.3}
+.qr-drink-desc{font-size:.7rem;color:var(--mid);margin-top:2px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qr-drink-price{font-size:.98rem;font-weight:700;color:var(--red);white-space:nowrap}
+.qr-drink-cat{
+  flex-shrink:0;font-size:.58rem;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);
+  border-radius:10px;padding:2px 6px;
+}
+
+/* Drink subfilter */
+.drink-subfilter{
+  display:flex;overflow-x:auto;gap:6px;padding:0 12px 12px;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
 .drink-subfilter::-webkit-scrollbar{display:none}
-.dsf-btn{flex-shrink:0;padding:6px 13px;border:1px solid rgba(0,0,0,.12);
+.dsf-btn{
+  flex-shrink:0;padding:7px 14px;border:1.5px solid rgba(0,0,0,.1);
   border-radius:16px;font-size:.72rem;font-weight:700;background:#fff;
-  color:var(--mid);cursor:pointer;transition:.2s;white-space:nowrap}
+  color:var(--mid);cursor:pointer;white-space:nowrap;transition:.18s;
+}
+.dsf-btn:active{transform:scale(.95)}
 .dsf-btn.active{background:var(--red);border-color:var(--red);color:#fff}
 
-/* Footer */
-.qr-footer{text-align:center;padding:30px 16px 40px;color:var(--mid);font-size:.75rem;line-height:1.8}
-.qr-footer strong{color:var(--text)}
-.qr-footer a{color:var(--red);text-decoration:none;font-weight:700}
+/* ── LIGHTBOX ── */
+.lb-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:1000;
+  display:flex;align-items:flex-end;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .28s ease;
+}
+.lb-overlay.open{opacity:1;pointer-events:all}
+.lb-sheet{
+  background:var(--white);border-radius:20px 20px 0 0;
+  width:100%;max-width:480px;max-height:88vh;overflow:hidden;
+  display:flex;flex-direction:column;
+  transform:translateY(100%);transition:transform .35s cubic-bezier(.2,1,.3,1);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+.lb-overlay.open .lb-sheet{transform:translateY(0)}
+.lb-img{width:100%;height:220px;object-fit:cover;flex-shrink:0;display:block;background:var(--cream-d)}
+.lb-drag{width:36px;height:4px;border-radius:2px;background:#e0e0e0;margin:10px auto 0;flex-shrink:0}
+.lb-body{padding:18px 18px 24px;overflow-y:auto}
+.lb-cat{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.lb-name{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--text);margin-bottom:4px;line-height:1.25}
+.lb-price{font-size:1.3rem;font-weight:700;color:var(--red);margin-bottom:12px}
+.lb-desc{font-size:.82rem;color:var(--mid);line-height:1.7;margin-bottom:14px}
+.lb-allergy-label{font-size:.62rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:6px}
+.lb-allergy-row{display:flex;flex-wrap:wrap;gap:5px}
+.lb-tag{font-size:.68rem;padding:4px 9px;border-radius:14px;background:#fff3cd;color:#856404;border:1px solid #ffc107;font-weight:700}
+.lb-close-btn{
+  width:100%;margin-top:16px;padding:14px;
+  background:var(--red);color:#fff;border:none;border-radius:var(--radius-sm);
+  font-size:.88rem;font-weight:700;letter-spacing:.06em;cursor:pointer;
+}
+
+/* ── ORDER SECTION ── */
+.order-section{
+  max-width:640px;margin:0 auto;padding:20px 12px 30px;
+}
+.order-section-title{
+  font-family:'Playfair Display',serif;font-size:1.15rem;
+  color:var(--text);margin-bottom:4px;
+}
+.order-section-sub{font-size:.75rem;color:var(--mid);margin-bottom:16px}
+.order-cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.order-qr-card{
+  background:var(--white);border-radius:var(--radius);padding:18px 12px;
+  text-align:center;border:1.5px solid rgba(0,0,0,.07);
+  box-shadow:var(--shadow);cursor:pointer;transition:all .2s ease;
+  text-decoration:none;color:var(--text);display:block;
+}
+.order-qr-card:active{transform:scale(.96)}
+.order-qr-card:hover{border-color:var(--red)}
+.order-qr-card img{height:40px;width:auto;object-fit:contain;margin:0 auto 10px;display:block}
+.order-qr-card h4{font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:3px}
+.order-qr-card p{font-size:.68rem;color:var(--mid)}
+.order-qr-card-full{
+  background:var(--cream-d);border-radius:var(--radius-sm);padding:14px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+  border:1.5px solid rgba(0,0,0,.06);cursor:pointer;
+  text-decoration:none;color:var(--text);
+}
+.order-qr-card-full:active{transform:scale(.98)}
+.order-qr-card-full-left{display:flex;align-items:center;gap:12px}
+.order-qr-card-full img{height:36px;width:auto;object-fit:contain}
+.order-qr-card-full h4{font-size:.85rem;font-weight:700;color:var(--text)}
+.order-qr-card-full p{font-size:.7rem;color:var(--mid)}
+.order-qr-card-full i{color:var(--mid);font-size:.8rem}
+
+/* Branch popup */
+.branch-popup-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:1100;
+  display:flex;align-items:flex-end;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .25s ease;
+}
+.branch-popup-overlay.open{opacity:1;pointer-events:all}
+.branch-popup{
+  background:var(--white);border-radius:20px 20px 0 0;
+  width:100%;max-width:480px;padding:20px 16px 32px;
+  transform:translateY(100%);transition:transform .35s cubic-bezier(.2,1,.3,1);
+  padding-bottom:env(safe-area-inset-bottom,28px);
+}
+.branch-popup-overlay.open .branch-popup{transform:translateY(0)}
+.bp-drag{width:36px;height:4px;border-radius:2px;background:#e0e0e0;margin:0 auto 16px}
+.bp-header{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.bp-header img{height:28px;width:auto;object-fit:contain}
+.bp-header h3{font-family:'Playfair Display',serif;font-size:1rem;color:var(--text)}
+.bp-note{font-size:.75rem;color:var(--mid);margin-bottom:16px}
+.bp-list{display:flex;flex-direction:column;gap:10px}
+.bp-branch{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px;border:1.5px solid rgba(0,0,0,.09);border-radius:var(--radius-sm);
+  text-decoration:none;color:var(--text);transition:.2s;
+}
+.bp-branch:active{background:var(--cream);transform:scale(.98)}
+.bp-branch-info h4{font-size:.88rem;font-weight:700;margin-bottom:2px}
+.bp-branch-info span{font-size:.72rem;color:var(--mid)}
+.bp-branch i{color:var(--red);font-size:.85rem}
+.bp-cancel{
+  margin-top:14px;width:100%;padding:13px;
+  background:transparent;border:1.5px solid rgba(0,0,0,.1);border-radius:var(--radius-sm);
+  font-size:.82rem;font-weight:700;color:var(--mid);cursor:pointer;
+}
+
+/* ── FOOTER ── */
+.qr-footer{
+  background:var(--text);color:rgba(255,255,255,.6);
+  text-align:center;padding:28px 16px 40px;font-size:.75rem;line-height:2;
+  margin-top:10px;
+}
+.qr-footer strong{color:#fff;display:block;font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:6px}
+.qr-footer a{color:var(--gold-lt);text-decoration:none}
+.qr-footer .back-link{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:14px;padding:10px 20px;border:1px solid rgba(255,255,255,.2);
+  border-radius:20px;color:rgba(255,255,255,.7);font-size:.75rem;font-weight:700;
+  text-decoration:none;letter-spacing:.06em;
+}
+
+/* No results */
+.no-results{text-align:center;padding:40px 16px;color:var(--light);font-size:.88rem}
 </style>
 </head>
 <body>
 
+<!-- Header -->
 <div class="qr-header">
-  <img src="img/logo.png" alt="Namaste"/>
-  <p>Indian &amp; Nepalese Restaurant · Hiroshima</p>
+  <div class="qr-header-brand">
+    <img src="img/logo.png" alt="Namaste"/>
+    <div class="qr-header-title">
+      <strong>NAMASTE</strong>
+      <span>Indian &amp; Nepalese Restaurant</span>
+    </div>
+  </div>
+  <div class="lang-switch">
+    <a href="menu-qr.html" class="active">EN</a>
+    <a href="menu-qr-jp.html">JP</a>
+  </div>
 </div>
 
-<div class="lang-bar">
-  <a href="menu-qr.html" class="active">English</a>
-  <a href="menu-qr-jp.html">日本語</a>
-</div>
-
+<!-- Hours -->
 <div class="hours-strip">
-  <strong>Lunch</strong> 11:00–15:00 (L.O. 14:30) &nbsp;|&nbsp;
-  <strong>Dinner</strong> 17:00–22:00 (L.O. 21:30)
+  <div class="hours-block"><strong>Lunch</strong> 11:00–15:00 <span style="color:var(--gold);font-size:.6rem">(L.O. 14:30)</span></div>
+  <div class="hours-dot"></div>
+  <div class="hours-block"><strong>Dinner</strong> 17:00–22:00 <span style="color:var(--gold);font-size:.6rem">(L.O. 21:30)</span></div>
+</div>
+
+<!-- Live Status -->
+<div class="status-bar" id="statusBar">
+  <span class="sdot" id="sDot"></span>
+  <span id="sLabel">Checking hours…</span>
 </div>
 
 <!-- Category tabs -->
-<div class="cat-tabs" id="catTabs">
-  <button class="cat-tab active" onclick="qrShow('lunch',this)">☀️ Lunch</button>
-  <button class="cat-tab" onclick="qrShow('curry',this)">🔥 Curry</button>
-  <button class="cat-tab" onclick="qrShow('ala-carte',this)">⭐ À La Carte</button>
-  <button class="cat-tab" onclick="qrShow('special',this)">👑 Special</button>
-  <button class="cat-tab" onclick="qrShow('dessert',this)">🍨 Dessert</button>
-  <button class="cat-tab" onclick="qrShow('drinks',this)">🥂 Drinks</button>
+<div class="cat-wrap">
+  <div class="cat-tabs" id="catTabs">
+    <button class="cat-tab active" onclick="qrShow('lunch',this)"><span class="tab-icon">☀️</span> Lunch</button>
+    <button class="cat-tab" onclick="qrShow('curry',this)"><span class="tab-icon">🔥</span> Curry</button>
+    <button class="cat-tab" onclick="qrShow('ala-carte',this)"><span class="tab-icon">⭐</span> À La Carte</button>
+    <button class="cat-tab" onclick="qrShow('special',this)"><span class="tab-icon">👑</span> Special</button>
+    <button class="cat-tab" onclick="qrShow('dessert',this)"><span class="tab-icon">🍨</span> Dessert</button>
+    <button class="cat-tab" onclick="qrShow('drinks',this)"><span class="tab-icon">🥂</span> Drinks</button>
+    <button class="cat-tab" onclick="qrShow('order',this)"><span class="tab-icon">🛵</span> Order</button>
+  </div>
 </div>
 
+<!-- Content area -->
 <div class="menu-list" id="menuList"></div>
 
+<!-- Footer -->
 <footer class="qr-footer">
-  <strong>Namaste Indian Restaurant</strong><br/>
-  Dambara <a href="tel:0822620004">082-262-0004</a> &nbsp;·&nbsp;
-  Hatchobori <a href="tel:0822223240">082-222-3240</a> &nbsp;·&nbsp;
-  Otemachi <a href="tel:0822363339">082-236-3339</a><br/><br/>
-  <a href="english.page.html">← Full Website</a>
+  <strong>Namaste Indian Restaurant</strong>
+  Dambara <a href="tel:0822620004">082-262-0004</a><br/>
+  Hatchobori <a href="tel:0822223240">082-222-3240</a><br/>
+  Otemachi <a href="tel:0822363339">082-236-3339</a>
+  <br/><a href="english.page.html" class="back-link"><i class="fas fa-arrow-left"></i> Full Website</a>
 </footer>
+
+<!-- Lightbox -->
+<div class="lb-overlay" id="lbOverlay" onclick="if(event.target===this)closeLb()">
+  <div class="lb-sheet" id="lbSheet">
+    <img class="lb-img" id="lbImg" src="" alt=""/>
+    <div class="lb-drag"></div>
+    <div class="lb-body">
+      <p class="lb-cat" id="lbCat"></p>
+      <h2 class="lb-name" id="lbName"></h2>
+      <div class="lb-price" id="lbPrice"></div>
+      <p class="lb-desc" id="lbDesc"></p>
+      <p class="lb-allergy-label" id="lbAllergyLabel"></p>
+      <div class="lb-allergy-row" id="lbAllergyRow"></div>
+      <button class="lb-close-btn" onclick="closeLb()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Branch Popup -->
+<div class="branch-popup-overlay" id="bpOverlay" onclick="if(event.target===this)closeBp()">
+  <div class="branch-popup">
+    <div class="bp-drag"></div>
+    <div class="bp-header">
+      <img id="bpLogo" src="" alt=""/>
+      <h3 id="bpTitle">Choose a Branch</h3>
+    </div>
+    <p class="bp-note" id="bpNote"></p>
+    <div class="bp-list" id="bpList"></div>
+    <button class="bp-cancel" onclick="closeBp()">Cancel</button>
+  </div>
+</div>
 
 <script src="js/index.js"></script>
 <script>
-// Drinks sub-filter state
-var currentDrinkFilter = 'all';
+/* ── Live Status ── */
+(function(){
+  var jst  = new Date(Date.now() + 9*3600000);
+  var mins = jst.getUTCHours()*60 + jst.getUTCMinutes();
+  var bar  = document.getElementById('statusBar');
+  var dot  = document.getElementById('sDot');
+  var lbl  = document.getElementById('sLabel');
+  if(!bar) return;
+  var open  = (mins>=660&&mins<870)||(mins>=1020&&mins<1290);
+  var brk   = mins>=900&&mins<1020;
+  var lo14  = mins>=870&&mins<900;
+  var lo21  = mins>=1290&&mins<1320;
+  if(lo14)       { bar.className='status-bar status-break'; dot.style.background='#f59e0b'; lbl.textContent='⚡ Last Order 14:30'; }
+  else if(lo21)  { bar.className='status-bar status-break'; dot.style.background='#f59e0b'; lbl.textContent='⚡ Last Order 21:30'; }
+  else if(open)  { bar.className='status-bar status-open';  lbl.textContent= (mins<870)?'● Lunch Open':'● Dinner Open'; }
+  else if(brk)   { bar.className='status-bar status-break'; lbl.textContent='◌ Break 15:00 – 17:00'; }
+  else           { bar.className='status-bar status-closed'; lbl.textContent='◌ Closed · Opens 11:00'; }
+})();
 
-function qrShow(cat, btn) {
+/* ── Allergy map ── */
+var ALLERGIES = {
+  'Butter Chicken Curry':['🥛 Dairy','🌰 Cashew'],
+  'Chicken & Spinach Curry':['🌶️ Spicy'],
+  'Keema Egg Curry':['🥚 Egg'],
+  'Samosa (2 pcs)':['🌾 Wheat','🌰 Cashew'],
+  'Momo (6 pcs)':['🌾 Wheat'],
+  'Tandoori Chicken':['🥛 Dairy'],
+  'Happy Lunch Set':['🥛 Dairy','🌾 Wheat','🥚 Egg'],
+  'Homemade Cheese & Spinach Curry':['🥛 Dairy'],
+  'Homemade Cheese & Butter Curry':['🥛 Dairy'],
+};
+
+/* ── Lightbox ── */
+var currentCategory = 'lunch';
+function openLb(item){
+  document.getElementById('lbImg').src   = item.image;
+  document.getElementById('lbImg').alt   = item.name;
+  document.getElementById('lbCat').textContent   = currentCategory.toUpperCase();
+  document.getElementById('lbName').textContent  = item.name;
+  document.getElementById('lbPrice').textContent = item.price;
+  document.getElementById('lbDesc').textContent  = item.description.replace(/<[^>]+>/g,' ');
+  var tags = ALLERGIES[item.name];
+  var row  = document.getElementById('lbAllergyRow');
+  var albl = document.getElementById('lbAllergyLabel');
+  row.innerHTML = '';
+  if(tags===undefined){ albl.textContent='Allergens'; row.innerHTML='<span class="lb-tag">⚠️ Ask staff</span>'; }
+  else if(tags.length){ albl.textContent='Contains'; tags.forEach(function(t){ var s=document.createElement('span'); s.className='lb-tag'; s.textContent=t; row.appendChild(s); }); }
+  else{ albl.textContent=''; }
+  document.getElementById('lbOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLb(){
+  document.getElementById('lbOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ closeLb(); closeBp(); }});
+
+/* ── Branch Popup ── */
+var ORDER_LINKS = {
+  uber:{
+    label:'Uber Eats', logo:'img/ubber_eats.png',
+    note:'Select your nearest branch on Uber Eats',
+    branches:[
+      {name:'Dambara',    url:'#', sub:'Delivery available'},
+      {name:'Hatchobori', url:'#', sub:'Delivery available'},
+      {name:'Otemachi',   url:'#', sub:'Delivery available'}
+    ]
+  },
+  wolt:{
+    label:'Wolt', logo:'img/wolt.png',
+    note:'Select your nearest branch on Wolt',
+    branches:[
+      {name:'Dambara',    url:'#', sub:'Delivery available'},
+      {name:'Hatchobori', url:'#', sub:'Delivery available'},
+      {name:'Otemachi',   url:'#', sub:'Delivery available'}
+    ]
+  },
+  takeaway:{
+    label:'In-Store Pickup', logo:'img/take_away.png',
+    note:'Call to place your pickup order',
+    branches:[
+      {name:'Dambara',    url:'tel:0822620004', sub:'082-262-0004', icon:'phone'},
+      {name:'Hatchobori', url:'tel:0822223240', sub:'082-222-3240', icon:'phone'},
+      {name:'Otemachi',   url:'tel:0822363339', sub:'082-236-3339', icon:'phone'}
+    ]
+  }
+};
+function openBp(type){
+  var d=ORDER_LINKS[type];
+  document.getElementById('bpLogo').src=d.logo;
+  document.getElementById('bpTitle').textContent=d.label;
+  document.getElementById('bpNote').textContent=d.note;
+  var list=document.getElementById('bpList');
+  list.innerHTML=d.branches.map(function(b){
+    var icon=b.icon||'arrow-right';
+    return '<a href="'+b.url+'" '+(type!=='takeaway'?'target="_blank"':'')+' class="bp-branch">'+
+      '<div class="bp-branch-info"><h4>'+b.name+'</h4><span>'+b.sub+'</span></div>'+
+      '<i class="fas fa-'+icon+'"></i></a>';
+  }).join('');
+  document.getElementById('bpOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeBp(){
+  document.getElementById('bpOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+/* ── Main render ── */
+var drinkFilter='all';
+function qrShow(cat, btn){
   document.querySelectorAll('.cat-tab').forEach(function(b){ b.classList.remove('active'); });
-  btn.classList.add('active');
-  var list = document.getElementById('menuList');
-  list.innerHTML = '';
+  if(btn) btn.classList.add('active');
+  currentCategory = cat;
+  var list=document.getElementById('menuList');
+  list.innerHTML='';
 
-  if (cat === 'drinks') {
-    // Sub-filter bar
-    var cats = ['all','beer','whiskey','cocktail','wine','plum','soft'];
-    var labels = {all:'All',beer:'🍺 Beer',whiskey:'🥃 Whiskey',cocktail:'🍹 Cocktail',
-                  wine:'🍷 Wine',plum:'梅 Plum',soft:'🥤 Soft'};
-    var sf = document.createElement('div');
-    sf.className = 'drink-subfilter';
+  if(cat==='order'){
+    var sec=document.createElement('div');
+    sec.className='order-section';
+    sec.innerHTML=
+      '<h2 class="order-section-title">Order Online</h2>'+
+      '<p class="order-section-sub">Choose how you\'d like to receive your order</p>'+
+      '<div class="order-cards-grid">'+
+        '<div class="order-qr-card" onclick="openBp(\'uber\')">'+
+          '<img src="img/ubber_eats.png" alt="Uber Eats"/><h4>Uber Eats</h4><p>Delivery to your door</p>'+
+        '</div>'+
+        '<div class="order-qr-card" onclick="openBp(\'wolt\')">'+
+          '<img src="img/wolt.png" alt="Wolt"/><h4>Wolt</h4><p>Quick delivery</p>'+
+        '</div>'+
+      '</div>'+
+      '<div class="order-qr-card-full" onclick="openBp(\'takeaway\')">'+
+        '<div class="order-qr-card-full-left">'+
+          '<img src="img/take_away.png" alt="Pickup"/>'+
+          '<div><h4>In-Store Pickup</h4><p>Call ahead · Collect at branch</p></div>'+
+        '</div>'+
+        '<i class="fas fa-chevron-right"></i>'+
+      '</div>';
+    list.appendChild(sec);
+    return;
+  }
+
+  if(cat==='drinks'){
+    var cats=['all','beer','whiskey','cocktail','wine','plum','soft'];
+    var lbls={all:'All',beer:'🍺 Beer',whiskey:'🥃 Whisky',cocktail:'🍹 Cocktail',wine:'🍷 Wine',plum:'梅 Plum',soft:'🥤 Soft'};
+    var sf=document.createElement('div'); sf.className='drink-subfilter';
     cats.forEach(function(c){
-      var b = document.createElement('button');
-      b.className = 'dsf-btn' + (c === currentDrinkFilter ? ' active' : '');
-      b.textContent = labels[c];
-      b.onclick = function(){
-        currentDrinkFilter = c;
+      var b=document.createElement('button');
+      b.className='dsf-btn'+(c===drinkFilter?' active':'');
+      b.textContent=lbls[c];
+      b.onclick=function(){
+        drinkFilter=c;
         document.querySelectorAll('.dsf-btn').forEach(function(x){ x.classList.remove('active'); });
         b.classList.add('active');
-        renderQrDrinks(c);
+        renderDrinksQr(c);
       };
       sf.appendChild(b);
     });
     list.appendChild(sf);
-    renderQrDrinks(currentDrinkFilter);
+    renderDrinksQr(drinkFilter);
     return;
   }
 
-  currentDrinkFilter = 'all';
-  var items = menuData[cat] || [];
+  drinkFilter='all';
+  var items=menuData[cat]||[];
+  if(!items.length){ list.innerHTML='<div class="no-results">No items found</div>'; return; }
   items.forEach(function(item){
-    var card = document.createElement('div');
-    card.className = 'menu-qr-card';
-    card.innerHTML =
-      '<img class="menu-qr-card-img" src="'+item.image+'" alt="'+item.name+'" loading="lazy" '+
-        'onerror="this.className=\'menu-qr-card-img placeholder\';this.innerHTML=\'🍛\'">'+
-      '<div class="menu-qr-card-body">'+
-        (item.badge ? '<span class="menu-qr-badge">'+item.badge+'</span>' : '')+
-        '<h3>'+item.name+'</h3>'+
-        '<p>'+item.description.replace(/<[^>]+>/g,' ')+'</p>'+
-        '<div class="menu-qr-price">'+item.price+'</div>'+
+    var card=document.createElement('div');
+    card.className='qr-card';
+    card.onclick=function(){ openLb(item); };
+    card.innerHTML=
+      '<img class="qr-card-img" src="'+item.image+'" alt="'+item.name+'" loading="lazy" onerror="this.style.background=\'#f0e4cc\'">'+
+      '<div class="qr-card-body">'+
+        '<div class="qr-card-top">'+
+          '<span class="qr-card-name">'+item.name+'</span>'+
+          (item.badge?'<span class="qr-card-badge">'+item.badge+'</span>':'')+
+        '</div>'+
+        '<p class="qr-card-desc">'+item.description.replace(/<[^>]+>/g,' ')+'</p>'+
+        '<div class="qr-card-footer">'+
+          '<span class="qr-card-price">'+item.price+'</span>'+
+          '<span class="qr-card-more"><i class="fas fa-expand-alt"></i> Details</span>'+
+        '</div>'+
       '</div>';
     list.appendChild(card);
   });
 }
 
-function renderQrDrinks(cat) {
-  // Remove any existing drink cards but keep the subfilter
-  var list = document.getElementById('menuList');
-  var old = list.querySelectorAll('.drink-qr-card');
-  old.forEach(function(el){ el.remove(); });
-
-  var filtered = cat === 'all' ? drinksData : drinksData.filter(function(d){ return d.category === cat; });
+function renderDrinksQr(cat){
+  var list=document.getElementById('menuList');
+  list.querySelectorAll('.qr-drink').forEach(function(el){ el.remove(); });
+  var catNames={beer:'Beer',whiskey:'Whiskey',cocktail:'Cocktail',wine:'Wine',plum:'Plum Wine',soft:'Soft Drink'};
+  var filtered=cat==='all'?drinksData:drinksData.filter(function(d){ return d.category===cat; });
+  if(!filtered.length){ list.insertAdjacentHTML('beforeend','<div class="no-results">No drinks found</div>'); return; }
   filtered.forEach(function(d){
-    var card = document.createElement('div');
-    card.className = 'drink-qr-card';
-    card.innerHTML =
-      '<div><h4>'+d.name+'</h4><p>'+d.description+'</p></div>'+
-      '<div class="dq-price">'+d.price+'</div>';
-    list.appendChild(card);
+    var el=document.createElement('div');
+    el.className='qr-drink';
+    el.innerHTML=
+      '<div class="qr-drink-info">'+
+        '<div class="qr-drink-name">'+d.name+'</div>'+
+        '<div class="qr-drink-desc">'+d.description+'</div>'+
+      '</div>'+
+      '<span class="qr-drink-cat">'+catNames[d.category]+'</span>'+
+      '<div class="qr-drink-price">'+d.price+'</div>';
+    list.appendChild(el);
   });
 }
 
-// Init with lunch
+/* Init */
 qrShow('lunch', document.querySelector('.cat-tab'));
 </script>
 </body>
